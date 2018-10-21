@@ -23,8 +23,8 @@ export class GraphqlOptions implements GqlOptionsFactory {
         'app',
         [
           'mutations/user-mutation',
-          'user.graphql',
-          'auth-payload.graphql',
+          'auth-payload',
+          'user',
         ],
       ),
     };
