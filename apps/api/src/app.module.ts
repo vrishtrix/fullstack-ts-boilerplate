@@ -8,6 +8,7 @@ import { TerminusService } from './terminus.service';
 import { CommonModule } from './common.module';
 import { PrismaModule } from './prisma';
 import { UserModule } from './user';
+// import { AuthModule } from './auth';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user';
       useClass: TerminusService,
     }),
     CommonModule,
+    // AuthModule,
     PrismaModule,
     UserModule,
   ],

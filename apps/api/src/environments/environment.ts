@@ -3,5 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  secret: process.env.APP_SECRET || 'H@llox1234',
+  prisma: {
+    endpoint: process.env.PRISMA_ENDPOINT || 'http://localhost:4466',
+    secret: process.env.PRISMA_SECRET || 'H@llox1234',
+  },
 };

@@ -2,11 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "sourceMap": true,
-    "strict": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"
@@ -18,11 +18,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@env/*": [
-        "apps/web/src/environments/*"
+      "@env/api": [
+        "apps/api/src/environments/environment"
       ],
-      "@api-env/*": [
-        "apps/api/src/environments/*"
+      "@env/web": [
+        "apps/web/src/environments/environment"
       ],
       "@kubic/schemas": [
         "libs/schemas/src/index.ts"
@@ -44,6 +44,12 @@
       ],
       "@kubic/home": [
         "libs/home/src/index.ts"
+      ],
+      "@kubic/dashboard": [
+        "libs/dashboard/src/index.ts"
+      ],
+      "@kubic/not-found": [
+        "libs/not-found/src/index.ts"
       ]
     }
   },

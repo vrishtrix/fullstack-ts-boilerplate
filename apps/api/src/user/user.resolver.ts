@@ -1,6 +1,7 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { JwtService } from '@nestjs/jwt';
+import { environment } from '@env/api';
 import { User } from '@kubic/schemas';
+import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 
 import { PrismaService } from '../prisma';
@@ -9,11 +10,11 @@ import { PrismaService } from '../prisma';
 export class UserResolver {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly jwt: JwtService,
+    //private readonly jwt: JwtService,
   ) {}
 
   private createToken(userId: string) {
-    return this.jwt.sign({ userId });
+    return jwt.sign({ userId }, environment.secret);
   }
 
   @Mutation('login')
@@ -36,7 +37,7 @@ export class UserResolver {
   }
 
   @Mutation('signup')
-  async signup(@Args() args: any) {
+  async signup(@Args() args: User) {
     const emailExists = await this.prisma.query.user({ where: { email: args.email } });
     if (emailExists) throw new Error(`Email: ${args.email} is already in use`);
 

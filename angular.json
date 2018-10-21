@@ -334,6 +334,62 @@
           }
         }
       }
+    },
+    "dashboard": {
+      "root": "libs/dashboard",
+      "sourceRoot": "libs/dashboard/src",
+      "projectType": "library",
+      "prefix": "kubic",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/dashboard/tsconfig.lib.json",
+              "libs/dashboard/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/dashboard/jest.config.js",
+            "tsConfig": "libs/dashboard/tsconfig.spec.json",
+            "setupFile": "libs/dashboard/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "not-found": {
+      "root": "libs/not-found",
+      "sourceRoot": "libs/not-found/src",
+      "projectType": "library",
+      "prefix": "kubic",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/not-found/tsconfig.lib.json",
+              "libs/not-found/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/not-found/jest.config.js",
+            "tsConfig": "libs/not-found/tsconfig.spec.json",
+            "setupFile": "libs/not-found/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {

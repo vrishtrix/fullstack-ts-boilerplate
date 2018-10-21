@@ -1,9 +1,9 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserModule } from '@angular/platform-browser';
-import { environment } from '@env/environment';
 import { CoreModule } from '@kubic/core';
 import { NgModule } from '@angular/core';
+import { environment } from '@env/web';
 import { NxModule } from '@nrwl/nx';
 
 import { PreloadSelectedModulesList } from './preloading-strategy';

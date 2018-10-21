@@ -1,5 +1,6 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,7 @@ import { I18nModule } from '@kubic/i18n';
     HttpClientModule,
     NgxPageScrollModule,
     NgxsModule.forRoot([]),
+    NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
     ClarityModule,
     GraphqlModule,

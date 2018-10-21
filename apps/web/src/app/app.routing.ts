@@ -1,14 +1,23 @@
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    loadChildren: '@kubic/home#HomeModule',
+    data: { preload: true },
   },
   {
-
-  }
+    path: 'dashboard',
+    loadChildren: '@kubic/dashboard#DashboardModule',
+    data: { preload: true },
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    loadChildren: '@kubic/not-found#NotFoundModule',
+  },
 ];
 
 export const AppRouting: ModuleWithProviders =
@@ -16,6 +25,6 @@ export const AppRouting: ModuleWithProviders =
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
     initialNavigation: 'enabled',
-    // preloadingStrategy: PreloadAllModules, // TODO: PreloadSelectedModulesList
+    preloadingStrategy: PreloadAllModules, // TODO: PreloadSelectedModulesList
     paramsInheritanceStrategy: 'always'
   });
