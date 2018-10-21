@@ -1,7 +1,11 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeLayoutComponent } from './containers';
+import {
+  HomeLayoutComponent,
+  LandingComponent,
+  PricingComponent,
+} from './containers';
 
 export const routes: Routes = [
   {
@@ -10,10 +14,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        data: { title: 'Infrastructure Cloud' }
-      }
-    ]
-  }
+        component: LandingComponent,
+        data: { title: 'Infrastructure Cloud' },
+      },
+      {
+        path: 'pricing',
+        component: PricingComponent,
+        data: { title: 'Pricing' },
+      },
+    ],
+  },
 ];
 
 export const HomeRouting: ModuleWithProviders = RouterModule.forChild(routes);

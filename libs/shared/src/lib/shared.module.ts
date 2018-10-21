@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClarityModule,
   ],
   exports: [
+    ClarityModule,
     CommonModule,
     ReactiveFormsModule,
   ]

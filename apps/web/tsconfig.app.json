@@ -9,6 +9,9 @@
     "**/*.spec.ts"
   ],
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../../libs/home/src/index.ts",
+    "../../libs/dashboard/src/index.ts",
+    "../../libs/not-found/src/index.ts"
   ]
 }

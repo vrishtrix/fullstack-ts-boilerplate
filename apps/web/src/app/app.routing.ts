@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: '@kubic/home#HomeModule',
     data: { preload: true },
   },
-  {
+  /*{
     path: 'dashboard',
     loadChildren: '@kubic/dashboard#DashboardModule',
     data: { preload: true },
@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '**',
     pathMatch: 'full',
     loadChildren: '@kubic/not-found#NotFoundModule',
-  },
+  },*/
 ];
 
 export const AppRouting: ModuleWithProviders =
