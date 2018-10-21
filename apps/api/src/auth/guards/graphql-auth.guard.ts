@@ -9,6 +9,8 @@ export class GraphqlAuthGuard extends AuthGuard('ext') implements CanActivate {
     const ctx = GqlExecutionContext.create(context);
     const { req } = ctx.getContext();
 
-    return super.canActivate(new ExecutionContextHost([req]));
+    return super.canActivate(
+      new ExecutionContextHost([req]),
+    );
   }
 }

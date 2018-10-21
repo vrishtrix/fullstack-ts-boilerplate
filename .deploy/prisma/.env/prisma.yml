@@ -1,0 +1,12 @@
+endpoint: ${env:PRISMA_ENDPOINT}
+secret: ${env:PRISMA_SECRET}
+datamodel:
+  - ${env:PRISMA_SCHEMA_PATH}/models/user.graphql
+seed:
+  import: ${env:PRISMA_SCHEMA_PATH}/seed.graphql
+hooks:
+  post-deploy:
+    - sudo graphql get-schema --project database
+    - sudo graphql codegen --project database
+    - sudo graphql get-schema --project app
+    - sudo graphql codegen --project app

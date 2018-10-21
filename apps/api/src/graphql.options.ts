@@ -1,7 +1,7 @@
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 
 export class GraphqlOptions implements GqlOptionsFactory {
-  private getTypePaths(prefix: string, paths: string[]) {
+  private getSchemaPaths(prefix: string, paths: string[]) {
     return paths.map(path =>
       require.resolve(`@kubic/schemas/${prefix}/${path}.graphql`),
     );
@@ -19,7 +19,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
         path: require.resolve('@kubic/schemas/app/index.ts'),
         outputAs: 'interface',
       },
-      typePaths: this.getTypePaths(
+      typePaths: this.getSchemaPaths(
         'app',
         [
           'mutations/user-mutation',
