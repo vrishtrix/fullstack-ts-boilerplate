@@ -16,6 +16,12 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@kubic/schemas/prisma": [
+        "libs/schemas/src/lib/prisma/index.ts"
+      ],
+      "@kubic/schemas": [
+        "libs/schemas/src/index.ts"
+      ]
     }
   },
   "exclude": [

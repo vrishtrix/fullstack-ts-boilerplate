@@ -1,0 +1,16 @@
+endpoint: http://localhost:4466
+
+secret: H@llox1234
+
+datamodel:
+  - ../schemas/src/prisma/models/user.graphql
+
+seed:
+  import: ../schemas/src/prisma/seed.graphql
+
+hooks:
+  post-deploy:
+    - sudo graphql get-schema --project database
+    - sudo graphql codegen --project database
+    - sudo graphql get-schema --project app
+    - sudo graphql codegen --project app

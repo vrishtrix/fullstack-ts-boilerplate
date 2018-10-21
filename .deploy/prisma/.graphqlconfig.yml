@@ -1,0 +1,23 @@
+projects:
+  app:
+    schemaPath: ../schemas/src/app.graphql
+    includes:
+      - ../schemas/src/app/mutations/user-mutation.graphql
+      - ../schemas/src/app/auth-payload.graphql
+      - ../schemas/src/app/user.graphql
+    extensions:
+      endpoints:
+        default: http://localhost:4466
+  database:
+    schemaPath: ../schemas/src/prisma/schema.graphql
+    includes:
+      # - ../schemas/src/prisma/prisma.graphql
+      - ../schemas/src/prisma/seed.graphql
+      - ../schemas/src/prisma/models/user.graphql
+    extensions:
+      prisma: ./prisma.yml
+      codegen:
+      - generator: prisma-binding
+        language: typescript
+        output:
+          binding: ../schemas/src/prisma/index.ts
