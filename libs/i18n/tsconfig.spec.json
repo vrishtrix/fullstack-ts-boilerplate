@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/schemas",
+    "outDir": "../../dist/out-tsc/libs/i18n",
     "module": "commonjs",
     "types": ["jest", "node"]
   },

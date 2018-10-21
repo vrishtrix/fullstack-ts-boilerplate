@@ -19,6 +19,21 @@
     },
     "schemas": {
       "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "graphql": {
+      "tags": []
+    },
+    "i18n": {
+      "tags": []
+    },
+    "home": {
+      "tags": []
     }
   }
 }

@@ -11,4 +11,11 @@ const routes: Routes = [
   }
 ];
 
-export const AppRouting: ModuleWithProviders = RouterModule.forRoot(routes);
+export const AppRouting: ModuleWithProviders =
+  RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+    initialNavigation: 'enabled',
+    // preloadingStrategy: PreloadAllModules, // TODO: PreloadSelectedModulesList
+    paramsInheritanceStrategy: 'always'
+  });

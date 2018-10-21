@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "sourceMap": true,
+    "strict": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -17,11 +18,32 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@env/*": [
+        "apps/web/src/environments/*"
+      ],
+      "@api-env/*": [
+        "apps/api/src/environments/*"
+      ],
       "@kubic/schemas": [
         "libs/schemas/src/index.ts"
       ],
       "@kubic/schemas/*": [
         "libs/schemas/src/lib/*"
+      ],
+      "@kubic/shared": [
+        "libs/shared/src/index.ts"
+      ],
+      "@kubic/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@kubic/graphql": [
+        "libs/graphql/src/index.ts"
+      ],
+      "@kubic/i18n": [
+        "libs/i18n/src/index.ts"
+      ],
+      "@kubic/home": [
+        "libs/home/src/index.ts"
       ]
     }
   },
