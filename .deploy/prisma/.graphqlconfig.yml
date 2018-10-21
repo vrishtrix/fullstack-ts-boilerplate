@@ -1,23 +1,29 @@
 projects:
-  app:
-    schemaPath: ../schemas/src/app.graphql
-    includes:
-      - ../schemas/src/app/mutations/user-mutation.graphql
-      - ../schemas/src/app/auth-payload.graphql
-      - ../schemas/src/app/user.graphql
-    extensions:
-      endpoints:
-        default: http://localhost:4466
+#  app:
+#    schemaPath: ../../libs/schemas/src/lib/app/app.graphql
+#    includes:
+#      - ../../libs/schemas/src/lib/app/mutations/user-mutation.graphql
+#      - ../../libs/schemas/src/lib/app/auth-payload.graphql
+#      - ../../libs/schemas/src/lib/app/user.graphql
+#    extensions:
+#      endpoints:
+#        default: http://localhost:4466
+#      codegen:
+#      - generator: graphql-binding
+#        language: typescript
+#        output:
+#          binding: ../../libs/schemas/src/lib/app/index.ts
+
   database:
-    schemaPath: ../schemas/src/prisma/schema.graphql
+    schemaPath: ../../libs/schemas/src/lib/prisma/schema.graphql
     includes:
       # - ../schemas/src/prisma/prisma.graphql
-      - ../schemas/src/prisma/seed.graphql
-      - ../schemas/src/prisma/models/user.graphql
+      - ../../libs/schemas/src/lib/prisma/seed.graphql
+      - ../../libs/schemas/src/lib/prisma/models/user.graphql
     extensions:
       prisma: ./prisma.yml
       codegen:
       - generator: prisma-binding
         language: typescript
         output:
-          binding: ../schemas/src/prisma/index.ts
+          binding: ../../libs/schemas/src/lib/prisma/index.ts
