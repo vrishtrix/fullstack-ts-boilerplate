@@ -1,9 +1,18 @@
-import { User } from '@kubic/schemas';
+import { AuthPayload, User } from '@kubic/schemas';
 
 export interface AuthLoginPayload {
   email: string;
   password: string;
   rememberMe: boolean;
+}
+
+export class AuthStore {
+  static readonly type = '[Auth] Store';
+  constructor(readonly payload: AuthPayload) {}
+}
+
+export class AuthCheck {
+  static readonly type = '[Auth] Check';
 }
 
 export class AuthLogin {

@@ -12,6 +12,7 @@
     "**/*.ts",
     "../../libs/home/src/index.ts",
     "../../libs/login/src/index.ts",
+    "../../libs/logout/src/index.ts",
     "../../libs/dashboard/src/index.ts",
     "../../libs/not-found/src/index.ts"
   ]

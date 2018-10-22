@@ -2,14 +2,20 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@kubic/shared';
 import { NgxsModule } from '@ngxs/store';
 
+import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
 import { AuthState } from './auth.state';
+import {
+  IsAuthenticatedGuard,
+  IsNotAuthenticatedGuard,
+} from './auth.guard';
 
 @NgModule({
   providers: [
     AuthService,
-    AuthGuard,
+    AuthResolver,
+    IsAuthenticatedGuard,
+    IsNotAuthenticatedGuard,
   ],
   // exports: [AuthService],
   imports: [

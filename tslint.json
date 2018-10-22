@@ -4,6 +4,7 @@
     "node_modules/@nrwl/schematics/src/tslint"
   ],
   "rules": {
+    "quotemark": [true, "single"],
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,

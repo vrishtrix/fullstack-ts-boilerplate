@@ -56,6 +56,9 @@
       ],
       "@kubic/login": [
         "libs/login/src/index.ts"
+      ],
+      "@kubic/logout": [
+        "libs/logout/src/index.ts"
       ]
     }
   },

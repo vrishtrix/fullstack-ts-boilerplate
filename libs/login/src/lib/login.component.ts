@@ -46,17 +46,19 @@ export class LoginComponent {
     this.loginBtnState = ClrLoadingState.ERROR;
 
     this.core.handleFormValidationErrors(this.loginForm, err);
-
-    return of();
   }
 
   onSubmit() {
     this.loginBtnState = ClrLoadingState.LOADING;
     const action = new AuthLogin(this.loginForm.value);
 
-    this.store.dispatch(action).pipe(
-      catchError(err => this.handleLoginError(err)),
-      tap(() => this.handleLoginSuccess()),
-    ).subscribe();
+    this.store.dispatch(action).subscribe(
+      () => this.handleLoginSuccess(),
+      (err) => this.handleLoginError(err),
+    );
+
+    /*  catchError(err => this.handleLoginError(err)),
+      tap(),
+    ).subscribe();*/
   }
 }

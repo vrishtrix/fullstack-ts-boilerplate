@@ -1,3 +1,4 @@
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { ClarityModule, ClrFormsNextModule } from '@clr/angular';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
@@ -10,11 +11,14 @@ import { NgxsModule } from '@ngxs/store';
 import { GraphqlModule } from '@kubic/graphql';
 import { I18nModule } from '@kubic/i18n';
 import { AuthModule } from '@kubic/auth';
+import { environment } from '@env/web';
 
 import { CoreService } from './services/core.service';
 
 @NgModule({
-  providers: [CoreService],
+  providers: [
+    CoreService,
+  ],
   exports: [
     ClarityModule,
     ClrFormsNextModule,
@@ -30,7 +34,10 @@ import { CoreService } from './services/core.service';
     ClrFormsNextModule,
     GraphqlModule,
     AuthModule,
-    I18nModule
+    I18nModule,
+    NgxsReduxDevtoolsPluginModule.forRoot({
+      disabled: environment.production,
+    }),
   ]
 })
 export class CoreModule {

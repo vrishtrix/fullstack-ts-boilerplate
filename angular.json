@@ -451,6 +451,34 @@
           }
         }
       }
+    },
+    "logout": {
+      "root": "libs/logout",
+      "sourceRoot": "libs/logout/src",
+      "projectType": "library",
+      "prefix": "kubic",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/logout/tsconfig.lib.json",
+              "libs/logout/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/logout/jest.config.js",
+            "tsConfig": "libs/logout/tsconfig.spec.json",
+            "setupFile": "libs/logout/src/test-setup.ts"
+          }
+        }
+      }
     }
   },
   "cli": {

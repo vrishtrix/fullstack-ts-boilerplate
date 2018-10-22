@@ -1,41 +1,50 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AuthPayload, loginMutation } from '@kubic/schemas';
+import { AuthPayload, loginMutation, User } from '@kubic/schemas';
 import { LocalStorage } from '@ngx-pwa/local-storage';
-import { catchError, map, pluck, tap } from 'rxjs/operators';
-import { Select } from '@ngxs/store';
-import { zip, Observable, throwError } from 'rxjs';
-import { AuthState } from '@kubic/auth';
+import { map, pluck } from 'rxjs/operators';
+import { Observable, of, forkJoin, merge } from 'rxjs';
+import { Store } from '@ngxs/store';
 
-import { AuthLoginPayload } from './auth.actions';
+import { AuthCheck, AuthLoginPayload } from './auth.actions';
 
 @Injectable()
 export class AuthService {
-  @Select(AuthState) auth$: Observable<AuthPayload>;
-
   constructor(
     private readonly apollo: Apollo,
+    private readonly _store: Store,
     private readonly localStorage: LocalStorage,
   ) {}
 
+  public get(): Observable<AuthPayload> {
+    return forkJoin(
+      this.localStorage.getItem('token'),
+      this.localStorage.getItem('user'),
+    ).pipe(
+      map(([token, user]: [string, User]) => ({
+        token,
+        user,
+      })),
+    );
+  }
+
   public store({ token, user }: AuthPayload) {
-    return zip(
+    return merge(
       this.localStorage.setItem('token', token),
       this.localStorage.setItem('user', user),
     );
   }
 
   public reset() {
-    return zip(
+    return merge(
       this.localStorage.removeItem('token'),
       this.localStorage.removeItem('user'),
     );
   }
 
-  public isAuthenticated(): Observable<boolean> {
-    return this.auth$.pipe(
-      map(auth => !!(auth.token && auth.user))
-    );
+  public getCredentials(): Observable<AuthPayload> {
+    return this._store.dispatch(new AuthCheck())
+      .pipe(pluck('auth'));
   }
 
   public login(payload: AuthLoginPayload): Observable<AuthPayload> {
@@ -43,13 +52,13 @@ export class AuthService {
       variables: payload,
       mutation: loginMutation,
     }).pipe(
-      pluck<any, AuthPayload>('data.login'),
+      pluck<any, AuthPayload>('data', 'login'),
     );
   }
 
-  /*public logout() {
-    return this.apollo.mutate({
+  public logout() {
+    return of(null);/*return this.apollo.mutate({
       mutation: logoutMutation,
-    });
-  }*/
+    });*/
+  }
 }

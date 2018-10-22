@@ -46,6 +46,9 @@
     },
     "login": {
       "tags": []
+    },
+    "logout": {
+      "tags": []
     }
   }
 }

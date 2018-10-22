@@ -1,34 +1,23 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { AuthGuard } from '@kubic/auth';
+import {
+  IsAuthenticatedGuard,
+  IsNotAuthenticatedGuard,
+} from '@kubic/auth';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    loadChildren: '@kubic/login#LoginModule',
-    // canLoad: [AuthGuard],
-    data: { preload: true },
-  },
-  /*{
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'home',
-  },
-  {
-    path: 'home',
-    loadChildren: '@kubic/home#HomeModule',
-    data: { preload: true },
-  },*/
-  /*{
-    path: 'dashboard',
-    loadChildren: '@kubic/dashboard#DashboardModule',
-    data: { preload: true },
-  },
-  {
-    path: '**',
-    pathMatch: 'full',
-    loadChildren: '@kubic/not-found#NotFoundModule',
-  },*/
+    {
+      path: 'login',
+      loadChildren: '@kubic/login#LoginModule',
+      canActivate: [IsNotAuthenticatedGuard],
+      data: { preload: true },
+    },
+    {
+      path: 'logout',
+      loadChildren: '@kubic/logout#LogoutModule',
+      // canActivate: [IsAuthenticatedGuard],
+      data: { preload: true },
+    },
 ];
 
 export const AppRouting: ModuleWithProviders =
