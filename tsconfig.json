@@ -13,7 +13,7 @@
     ],
     "lib": [
       "es2017",
-      "esnext.asynciterable",
+      "esnext",
       "dom"
     ],
     "baseUrl": ".",

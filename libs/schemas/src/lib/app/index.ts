@@ -9,6 +9,7 @@ export interface IMutation {
 }
 
 export interface IQuery {
+    findUser(username: string): User | Promise<User>;
     temp__(): boolean | Promise<boolean>;
 }
 

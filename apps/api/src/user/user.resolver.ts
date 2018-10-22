@@ -1,23 +1,19 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { UserInputError } from 'apollo-server';
-import { environment } from '@env/api';
+import { JwtService } from '@nestjs/jwt';
 import { User } from '@kubic/schemas';
-import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 
-import { PrismaService } from '../prisma';
-import { BadRequestException } from '@nestjs/common';
+import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
+import { UserService } from './user.service';
 
 @Resolver('User')
 export class UserResolver {
   constructor(
-    private readonly prisma: PrismaService,
-    //private readonly jwt: JwtService,
+    private readonly user: UserService,
+    private readonly jwt: JwtService,
   ) {}
-
-  private createToken(userId: string) {
-    return jwt.sign({ userId }, environment.secret);
-  }
 
   private hasValidationErrors(validationErrors: object) {
     return Object.keys(validationErrors).length > 0;
@@ -30,9 +26,15 @@ export class UserResolver {
     );
   }
 
+  @Query()
+  @UseGuards(GqlAuthGuard)
+  async findUser(@Args('username') username: string) {
+    return await this.user.find({ username });
+  }
+
   @Mutation('login')
   async login(@Args() { email, password }: User) {
-    const user = await this.prisma.query.user({ where: { email } });
+    const user = await this.user.find({ email });
     if (!user) {
       this.throwValidationErrors('login', {
         email: `No such user found with email`,
@@ -46,7 +48,7 @@ export class UserResolver {
       });
     }
 
-    const token = this.createToken(user.id);
+    const token = this.jwt.sign({ id: user.id });
     return {
       token,
       user,
@@ -54,36 +56,30 @@ export class UserResolver {
   }
 
   @Mutation('signup')
-  async signup(@Args() args: User) {
+  async signup(@Args() { email, username, password }: User) {
     const errors: any = {};
 
-    const emailExists = await this.prisma.query.user({
-      where: { email: args.email },
-    });
+    const emailExists = await this.user.find({ email });
     if (emailExists) {
-      errors.email = `Email: ${args.email} is already in use`;
+      errors.email = `Email: ${email} is already in use`;
     }
 
-    const usernameExists = await this.prisma.query.user({
-      where: { username: args.username },
-    });
+    const usernameExists = await this.user.find({ username });
     if (usernameExists) {
-      errors.username = `Username: ${args.username} is already in use`;
+      errors.username = `Username: ${username} is already in use`;
     }
 
     if (this.hasValidationErrors(errors)) {
       this.throwValidationErrors('signup', errors);
     }
 
-    const password = await bcrypt.hash(args.password, 10);
-    const user = await this.prisma.mutation.createUser({
-      data: {
-        ...args,
-        password,
-      }
+    const user = await this.user.create({
+      email,
+      username,
+      password,
     });
-    const token = this.createToken(user.id);
 
+    const token = this.jwt.sign({ id: user.id });
     return {
       token,
       user,

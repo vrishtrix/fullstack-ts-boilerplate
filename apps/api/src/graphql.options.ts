@@ -22,7 +22,8 @@ export class GraphqlOptions implements GqlOptionsFactory {
       typePaths: this.getSchemaPaths(
         'app',
         [
-          'mutations/user-mutation',
+          'mutations',
+          'queries',
           'auth-payload',
           'user',
         ],

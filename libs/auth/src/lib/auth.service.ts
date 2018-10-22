@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AuthPayload, loginMutation, User } from '@kubic/schemas';
+import { AuthPayload, LOGIN_MUTATION, User } from '@kubic/schemas';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { map, pluck } from 'rxjs/operators';
 import { Observable, of, forkJoin, merge } from 'rxjs';
@@ -49,10 +49,10 @@ export class AuthService {
 
   public login(payload: AuthLoginPayload): Observable<AuthPayload> {
     return this.apollo.mutate({
+      mutation: LOGIN_MUTATION,
       variables: payload,
-      mutation: loginMutation,
     }).pipe(
-      pluck<any, AuthPayload>('data', 'login'),
+      pluck('data', 'login'),
     );
   }
 
