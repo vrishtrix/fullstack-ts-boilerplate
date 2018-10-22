@@ -59,12 +59,12 @@ export class UserResolver {
   async signup(@Args() { email, username, password }: User) {
     const errors: any = {};
 
-    const emailExists = await this.user.find({ email });
+    const emailExists = await this.user.exists({ email });
     if (emailExists) {
       errors.email = `Email: ${email} is already in use`;
     }
 
-    const usernameExists = await this.user.find({ username });
+    const usernameExists = await this.user.exists({ username });
     if (usernameExists) {
       errors.username = `Username: ${username} is already in use`;
     }

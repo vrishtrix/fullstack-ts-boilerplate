@@ -1,4 +1,4 @@
-import { UserWhereUniqueInput } from '@kubic/schemas/prisma';
+import { UserWhereInput, UserWhereUniqueInput } from '@kubic/schemas/prisma';
 import { Injectable } from '@nestjs/common';
 import { User } from '@kubic/schemas';
 import * as bcrypt from 'bcryptjs';
@@ -10,8 +10,11 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   public find(where: UserWhereUniqueInput) {
-    console.log(where);
     return this.prisma.query.user({ where });
+  }
+
+  public exists(where: UserWhereInput) {
+    return this.prisma.exists.User(where);
   }
 
   public async create(user: User) {
