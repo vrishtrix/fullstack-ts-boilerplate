@@ -407,7 +407,7 @@
           "options": {
             "main": "libs/auth/src/test.ts",
             "tsConfig": "libs/auth/tsconfig.spec.json",
-            "karmaConfig": "libs/auth/karma.conf.js"
+            "karmaConfig": "libs/auth/jest.config.js"
           }
         },
         "lint": {
@@ -423,10 +423,39 @@
           }
         }
       }
+    },
+    "login": {
+      "root": "libs/login",
+      "sourceRoot": "libs/login/src",
+      "projectType": "library",
+      "prefix": "kubic",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/login/src/test.ts",
+            "tsConfig": "libs/login/tsconfig.spec.json",
+            "karmaConfig": "libs/login/jest.config.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/login/tsconfig.lib.json",
+              "libs/login/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
     "warnings": {
+      "showCircularDependencies": false,
       "typescriptMismatch": false,
       "versionMismatch": false
     },

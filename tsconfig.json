@@ -53,6 +53,9 @@
       ],
       "@kubic/auth": [
         "libs/auth/src/index.ts"
+      ],
+      "@kubic/login": [
+        "libs/login/src/index.ts"
       ]
     }
   },

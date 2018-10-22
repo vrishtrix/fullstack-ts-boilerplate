@@ -1,26 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { LocalStorage } from '@ngx-pwa/local-storage';
 import { AuthPayload, loginMutation } from '@kubic/schemas';
-import { map, pluck } from 'rxjs/operators';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { catchError, map, pluck, tap } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
+import { zip, Observable, throwError } from 'rxjs';
+import { AuthState } from '@kubic/auth';
+
+import { AuthLoginPayload } from './auth.actions';
 
 @Injectable()
 export class AuthService {
+  @Select(AuthState) auth$: Observable<AuthPayload>;
+
   constructor(
-    private readonly localStorage: LocalStorage,
     private readonly apollo: Apollo,
+    private readonly localStorage: LocalStorage,
   ) {}
 
-  public login(email: string, password: string) {
-    return this.apollo.mutate({
-      variables: { email, password },
-      mutation: loginMutation,
-    }).pipe(
-      pluck('data.login'),
-      map(({ token, user }: AuthPayload) => [
-        this.localStorage.setItem('token', token),
-        this.localStorage.setItem('user', user),
-      ]),
+  public store({ token, user }: AuthPayload) {
+    return zip(
+      this.localStorage.setItem('token', token),
+      this.localStorage.setItem('user', user),
     );
   }
+
+  public reset() {
+    return zip(
+      this.localStorage.removeItem('token'),
+      this.localStorage.removeItem('user'),
+    );
+  }
+
+  public isAuthenticated(): Observable<boolean> {
+    return this.auth$.pipe(
+      map(auth => !!(auth.token && auth.user))
+    );
+  }
+
+  public login(payload: AuthLoginPayload): Observable<AuthPayload> {
+    return this.apollo.mutate({
+      variables: payload,
+      mutation: loginMutation,
+    }).pipe(
+      pluck<any, AuthPayload>('data.login'),
+    );
+  }
+
+  /*public logout() {
+    return this.apollo.mutate({
+      mutation: logoutMutation,
+    });
+  }*/
 }

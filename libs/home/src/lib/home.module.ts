@@ -1,31 +1,36 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@kubic/shared';
-import { AuthModule } from '@kubic/auth';
+// import { AuthModule } from '@kubic/auth';
 
-import { HomeRouting } from './home.routing';
+// import { HomeRouting } from './home.routing';
 import { HeaderComponent } from './components';
 import {
-  LoginComponent,
+  // LoginComponent,
   HomeLayoutComponent,
-  LandingComponent,
-  PricingComponent
+  // LandingComponent,
+  // PricingComponent
 } from './containers';
 
 @NgModule({
+  exports: [
+    SharedModule,
+    HeaderComponent,
+    // HomeLayoutComponent,
+  ],
   declarations: [
     HeaderComponent,
-    HomeLayoutComponent,
-    LoginComponent,
-    LandingComponent,
-    PricingComponent,
+    // HomeLayoutComponent,
+    // LoginComponent,
+    // LandingComponent,
+    // PricingComponent,
   ],
   imports: [
-    AuthModule,
+    // AuthModule,
     SharedModule,
     /*NgxsModule.forFeature([
       LoginState,
     ]),*/
-    HomeRouting,
+    // HomeRouting,
   ]
 })
 export class HomeModule {}

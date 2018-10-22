@@ -1,8 +1,15 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
+import { AuthGuard } from '@kubic/auth';
 
 const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: '@kubic/login#LoginModule',
+    // canLoad: [AuthGuard],
+    data: { preload: true },
+  },
+  /*{
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
@@ -11,7 +18,7 @@ const routes: Routes = [
     path: 'home',
     loadChildren: '@kubic/home#HomeModule',
     data: { preload: true },
-  },
+  },*/
   /*{
     path: 'dashboard',
     loadChildren: '@kubic/dashboard#DashboardModule',

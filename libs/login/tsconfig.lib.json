@@ -1,8 +1,8 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/out-tsc/libs/core",
-    "target": "es6",
+    "outDir": "../../dist/out-tsc/libs/login",
+    "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
     "declaration": true,
