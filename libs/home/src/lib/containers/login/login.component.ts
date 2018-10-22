@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { environment } from '@env/web';
 import { ClrLoadingState } from '@clr/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthPayload, loginMutation } from '@kubic/schemas';
 import { AuthService } from '@kubic/auth';
 
 @Component({
