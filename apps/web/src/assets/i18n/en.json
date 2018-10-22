@@ -2,5 +2,10 @@
   "dashboard": "Dashboard",
   "actions": {
     "confirm": "Confirm"
+  },
+  "forms": {
+    "password": {
+      "required": "Password is required"
+    }
   }
 }

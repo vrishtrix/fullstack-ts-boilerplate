@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   HomeLayoutComponent,
   LandingComponent,
-  PricingComponent,
+  LoginComponent,
+  PricingComponent
 } from './containers';
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         component: LandingComponent,
         data: { title: 'Infrastructure Cloud' },
       },
@@ -21,6 +23,11 @@ export const routes: Routes = [
         path: 'pricing',
         component: PricingComponent,
         data: { title: 'Pricing' },
+      },
+      {
+        path: 'login',
+        component: LoginComponent,
+        data: { title: 'Login' },
       },
     ],
   },

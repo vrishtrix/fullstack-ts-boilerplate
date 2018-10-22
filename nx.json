@@ -40,6 +40,9 @@
     },
     "not-found": {
       "tags": []
+    },
+    "auth": {
+      "tags": []
     }
   }
 }

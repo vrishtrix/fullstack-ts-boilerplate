@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+  <form novalidate clrForm [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="login">
+    <section class="title">
+      <h3 class="welcome">Welcome to</h3>
+      {{ title }}
+      <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+    </section>
+    <div class="login-group">
+      <clr-input-container>
+        <input clrInput type="text" formControlName="email" placeholder="E-mail" />
+        <!-- @TODO: Figure out why I can't wrap this in a ng-container or ng-template -->
+          <clr-control-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].errors['required']">
+            Email is required
+          </clr-control-error>
+          <clr-control-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].errors['email']">
+            Must be a valid email
+          </clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <input clrInput type="password" formControlName="password" placeholder="Password" />
+          <clr-control-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].errors['required']">
+            Password is required
+          </clr-control-error>
+          <clr-control-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].errors['minlength']">
+            Password must be minimum {{ loginForm.controls['password'].errors['minlength']['requiredLength'] }} characters
+          </clr-control-error>
+      </clr-input-container>
+      <clr-checkbox formControlName="rememberMe">
+        Remember me
+      </clr-checkbox>
+      <button [clrLoading]="loginBtnState" [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
+      <a routerLink="/register" class="signup">Sign up for a Company ID</a>
+    </div>
+  </form>
+</div>

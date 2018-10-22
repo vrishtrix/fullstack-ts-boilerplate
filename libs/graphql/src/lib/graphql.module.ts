@@ -13,23 +13,26 @@ export class GraphqlModule {
   constructor(apollo: Apollo, httpLink: HttpLink, localStorage: LocalStorage) {
     const cache = new InMemoryCache();
     const http = httpLink.create({
-      uri: 'http://localhost:3000',
-      withCredentials: true
+      uri: 'http://localhost:3000/graphql',
+      // withCredentials: true,
     });
 
-    const auth = setContext(async (_, headers) => {
+    /*const auth = setContext(async (_, headers) => {
       const token = await localStorage.getItem<string>('token').toPromise();
 
-      if (!token) return {};
+
+      if (!token) return {
+        headers: headers.append('Origin', 'http://localhost:4200'),
+      };
 
       return {
-        headers: headers.append('Authorization', `Bearer ${token}`)
+        headers: headers.append('Authorization', `Bearer ${token}`),
       };
-    });
+    });*/
 
     apollo.create({
-      link: auth.concat(http),
-      cache
+      link: http,
+      cache,
     });
   }
 }

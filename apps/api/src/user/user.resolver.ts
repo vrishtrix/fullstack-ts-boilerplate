@@ -18,7 +18,9 @@ export class UserResolver {
   }
 
   @Mutation('login')
-  async login(@Args() { password, email }: User) {
+  async login(@Args() { email, password }: User) {
+    console.log(email, password);
+
     const user = await this.prisma.query.user({ where: { email } });
     if (!user) {
       throw new Error(`No such user found with email: ${email}`);

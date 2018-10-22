@@ -50,6 +50,9 @@
       ],
       "@kubic/not-found": [
         "libs/not-found/src/index.ts"
+      ],
+      "@kubic/auth": [
+        "libs/auth/src/index.ts"
       ]
     }
   },
