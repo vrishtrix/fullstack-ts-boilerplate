@@ -8,5 +8,6 @@ export const environment = {
   prisma: {
     endpoint: process.env.PRISMA_ENDPOINT || 'http://localhost:4466',
     secret: process.env.PRISMA_SECRET || 'H@llox1234',
+    debug: Boolean(process.env.PRISMA_DEBUG),
   },
 };

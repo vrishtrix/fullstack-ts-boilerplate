@@ -3,7 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
 import { AuthLogout } from '@kubic/auth';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class LogoutGuard implements CanActivate {
@@ -16,7 +16,6 @@ export class LogoutGuard implements CanActivate {
     return this.store.dispatch(new AuthLogout())
       .pipe(
         map(() => false),
-        tap(() => this.router.navigate(['/'])),
       );
   }
 }

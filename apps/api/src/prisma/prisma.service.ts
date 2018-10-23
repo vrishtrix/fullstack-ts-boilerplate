@@ -5,9 +5,6 @@ import { environment } from '@env/api';
 @Injectable()
 export class PrismaService extends Prisma {
   constructor() {
-    super({
-      debug: !environment.production,
-      ...environment.prisma,
-    });
+    super(environment.prisma);
   }
 }

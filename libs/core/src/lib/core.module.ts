@@ -1,5 +1,6 @@
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { ClarityModule, ClrFormsNextModule } from '@clr/angular';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -34,9 +35,13 @@ import { CoreService } from './services/core.service';
     ClrFormsNextModule,
     GraphqlModule,
     AuthModule,
+
     I18nModule,
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production,
+    }),
+    NgxsStoragePluginModule.forRoot({
+      key: 'auth.token',
     }),
   ]
 })

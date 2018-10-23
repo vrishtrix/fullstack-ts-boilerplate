@@ -6,7 +6,7 @@ import { map, pluck } from 'rxjs/operators';
 import { Observable, of, forkJoin, merge } from 'rxjs';
 import { Store } from '@ngxs/store';
 
-import { AuthCheck, AuthLoginPayload } from './auth.actions';
+import { AuthLoginPayload } from './auth.actions';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +16,7 @@ export class AuthService {
     private readonly localStorage: LocalStorage,
   ) {}
 
-  public get(): Observable<AuthPayload> {
+  /*public get(): Observable<AuthPayload> {
     return forkJoin(
       this.localStorage.getItem('token'),
       this.localStorage.getItem('user'),
@@ -45,7 +45,7 @@ export class AuthService {
   public getCredentials(): Observable<AuthPayload> {
     return this._store.dispatch(new AuthCheck())
       .pipe(pluck('auth'));
-  }
+  }*/
 
   public login(payload: AuthLoginPayload): Observable<AuthPayload> {
     return this.apollo.mutate({

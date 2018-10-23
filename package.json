@@ -71,6 +71,7 @@
     "@ngx-translate/http-loader": "^3.0.1",
     "@ngxs/form-plugin": "^3.2.0",
     "@ngxs/router-plugin": "^3.2.0",
+    "@ngxs/storage-plugin": "^3.2.0",
     "@ngxs/store": "^3.2.0",
     "@nrwl/nx": "6.4.0",
     "@webcomponents/custom-elements": "1.0.0",

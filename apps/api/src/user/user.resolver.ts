@@ -19,9 +19,9 @@ export class UserResolver {
     return Object.keys(validationErrors).length > 0;
   }
 
-  private throwValidationErrors(action: string, validationErrors: object) {
+  private throwValidationErrors(mutation: string, validationErrors: object) {
     throw new UserInputError(
-      `Failed to ${action} due to validation errors`,
+      `Failed to ${mutation} due to validation errors`,
       { validationErrors },
     );
   }
@@ -32,7 +32,7 @@ export class UserResolver {
     return await this.user.find({ username });
   }
 
-  @Mutation('login')
+  @Mutation()
   async login(@Args() { email, password }: User) {
     const user = await this.user.find({ email });
     if (!user) {
@@ -55,18 +55,22 @@ export class UserResolver {
     };
   }
 
-  @Mutation('signup')
+  @Mutation()
   async signup(@Args() { email, username, password }: User) {
     const errors: any = {};
 
+    if (password.length < 6) {
+      errors.password = `Password must be at least 6 characters`;
+    }
+
     const emailExists = await this.user.exists({ email });
     if (emailExists) {
-      errors.email = `Email: ${email} is already in use`;
+      errors.email = `Email ${email} is already in use`;
     }
 
     const usernameExists = await this.user.exists({ username });
     if (usernameExists) {
-      errors.username = `Username: ${username} is already in use`;
+      errors.username = `Username ${username} is already in use`;
     }
 
     if (this.hasValidationErrors(errors)) {
