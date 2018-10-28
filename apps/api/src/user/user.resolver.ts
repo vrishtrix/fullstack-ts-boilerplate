@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { UserInputError } from 'apollo-server';
+import { UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@kubic/schemas';
 import * as bcrypt from 'bcryptjs';
@@ -26,6 +26,13 @@ export class UserResolver {
     );
   }
 
+  private createToken(user: User) {
+    return this.jwt.sign({
+      id: user.id,
+      hash: user.password,
+    });
+  }
+
   @Query()
   @UseGuards(GqlAuthGuard)
   async findUser(@Args('username') username: string) {
@@ -49,6 +56,8 @@ export class UserResolver {
     }
 
     const token = this.jwt.sign({ id: user.id });
+    await this.user.updateToken(user.id, token);
+
     return {
       token,
       user,
@@ -83,7 +92,13 @@ export class UserResolver {
       password,
     });
 
-    const token = this.jwt.sign({ id: user.id });
+    const token = this.jwt.sign({
+      id: user.id,
+      hash: user.password,
+    });
+
+    await this.user.updateToken(user.id, token);
+
     return {
       token,
       user,

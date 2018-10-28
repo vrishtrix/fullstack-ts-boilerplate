@@ -1,0 +1,6 @@
+{
+  "watch": ["apps/universal/src"],
+  "ext": "ts",
+  "ignore": ["apps/universal/src/**/*.spec.ts"],
+  "exec": "node --inspect-brk -r ts-node/register apps/universal/src/main.ts"
+}

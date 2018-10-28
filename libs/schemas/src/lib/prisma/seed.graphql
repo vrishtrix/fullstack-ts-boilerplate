@@ -2,7 +2,7 @@ mutation {
   demo: createUser(
     username: "demo",
     email: "demo@foret.ag",
-    password: "demo"
+    password: "H@llox1234"
   ) {
     id
   }

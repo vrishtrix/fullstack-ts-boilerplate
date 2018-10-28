@@ -1,5 +1,11 @@
 version: '3'
 services:
+  redis:
+    image: redis
+    volumes:
+      - redis:/usr/local/etc/redis/redis.conf
+    ports:
+      - '6379:6379'
   prisma:
     image: prismagraphql/prisma:1.16
     restart: always
@@ -27,4 +33,5 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 volumes:
+  redis:
   postgres:

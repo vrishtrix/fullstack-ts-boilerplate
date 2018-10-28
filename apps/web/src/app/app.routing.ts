@@ -1,7 +1,7 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 import {
-  IsAuthenticatedGuard,
+  AuthGuard,
   IsNotAuthenticatedGuard,
 } from '@kubic/auth';
 

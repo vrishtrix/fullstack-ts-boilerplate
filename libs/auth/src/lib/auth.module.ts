@@ -6,14 +6,14 @@ import { NgxsModule } from '@ngxs/store';
 import { AuthService } from './auth.service';
 import { AuthState } from './auth.state';
 import {
-  IsAuthenticatedGuard,
+  AuthGuard,
   IsNotAuthenticatedGuard,
-} from './auth.guard';
+} from './guards';
 
 @NgModule({
   providers: [
     AuthService,
-    IsAuthenticatedGuard,
+    AuthGuard,
     IsNotAuthenticatedGuard,
   ],
   // exports: [AuthService],

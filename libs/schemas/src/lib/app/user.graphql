@@ -3,4 +3,7 @@ type User {
   password: String!
   username: String!
   email: String!
+  token: String
+  lastLogin: Int
+  lastLogout: Int
 }

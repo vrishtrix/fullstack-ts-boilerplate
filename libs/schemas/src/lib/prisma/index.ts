@@ -121,6 +121,9 @@ type User implements Node {
   username: String!
   email: String!
   password: String!
+  lastToken: String
+  lastLogin: Int
+  lastLogout: Int
 }
 
 """A connection to a list of items."""
@@ -137,6 +140,9 @@ input UserCreateInput {
   username: String!
   email: String!
   password: String!
+  lastToken: String
+  lastLogin: Int
+  lastLogout: Int
 }
 
 """An edge in a connection."""
@@ -157,6 +163,12 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  lastToken_ASC
+  lastToken_DESC
+  lastLogin_ASC
+  lastLogin_DESC
+  lastLogout_ASC
+  lastLogout_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -168,6 +180,9 @@ type UserPreviousValues {
   username: String!
   email: String!
   password: String!
+  lastToken: String
+  lastLogin: Int
+  lastLogout: Int
 }
 
 type UserSubscriptionPayload {
@@ -213,6 +228,9 @@ input UserUpdateInput {
   username: String
   email: String
   password: String
+  lastToken: String
+  lastLogin: Int
+  lastLogout: Int
 }
 
 input UserWhereInput {
@@ -384,6 +402,90 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  lastToken: String
+
+  """All values that are not equal to given value."""
+  lastToken_not: String
+
+  """All values that are contained in given list."""
+  lastToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastToken_not_in: [String!]
+
+  """All values less than the given value."""
+  lastToken_lt: String
+
+  """All values less than or equal the given value."""
+  lastToken_lte: String
+
+  """All values greater than the given value."""
+  lastToken_gt: String
+
+  """All values greater than or equal the given value."""
+  lastToken_gte: String
+
+  """All values containing the given string."""
+  lastToken_contains: String
+
+  """All values not containing the given string."""
+  lastToken_not_contains: String
+
+  """All values starting with the given string."""
+  lastToken_starts_with: String
+
+  """All values not starting with the given string."""
+  lastToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastToken_ends_with: String
+
+  """All values not ending with the given string."""
+  lastToken_not_ends_with: String
+  lastLogin: Int
+
+  """All values that are not equal to given value."""
+  lastLogin_not: Int
+
+  """All values that are contained in given list."""
+  lastLogin_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lastLogin_not_in: [Int!]
+
+  """All values less than the given value."""
+  lastLogin_lt: Int
+
+  """All values less than or equal the given value."""
+  lastLogin_lte: Int
+
+  """All values greater than the given value."""
+  lastLogin_gt: Int
+
+  """All values greater than or equal the given value."""
+  lastLogin_gte: Int
+  lastLogout: Int
+
+  """All values that are not equal to given value."""
+  lastLogout_not: Int
+
+  """All values that are contained in given list."""
+  lastLogout_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lastLogout_not_in: [Int!]
+
+  """All values less than the given value."""
+  lastLogout_lt: Int
+
+  """All values less than or equal the given value."""
+  lastLogout_lte: Int
+
+  """All values greater than the given value."""
+  lastLogout_gt: Int
+
+  """All values greater than or equal the given value."""
+  lastLogout_gte: Int
 }
 
 input UserWhereUniqueInput {
@@ -407,6 +509,12 @@ export type UserOrderByInput =   'id_ASC' |
   'email_DESC' |
   'password_ASC' |
   'password_DESC' |
+  'lastToken_ASC' |
+  'lastToken_DESC' |
+  'lastLogin_ASC' |
+  'lastLogin_DESC' |
+  'lastLogout_ASC' |
+  'lastLogout_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -420,6 +528,9 @@ export interface UserCreateInput {
   username: String
   email: String
   password: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
 }
 
 export interface UserWhereUniqueInput {
@@ -432,6 +543,9 @@ export interface UserUpdateInput {
   username?: String
   email?: String
   password?: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
 }
 
 export interface UserSubscriptionWhereInput {
@@ -505,6 +619,36 @@ export interface UserWhereInput {
   password_not_starts_with?: String
   password_ends_with?: String
   password_not_ends_with?: String
+  lastToken?: String
+  lastToken_not?: String
+  lastToken_in?: String[] | String
+  lastToken_not_in?: String[] | String
+  lastToken_lt?: String
+  lastToken_lte?: String
+  lastToken_gt?: String
+  lastToken_gte?: String
+  lastToken_contains?: String
+  lastToken_not_contains?: String
+  lastToken_starts_with?: String
+  lastToken_not_starts_with?: String
+  lastToken_ends_with?: String
+  lastToken_not_ends_with?: String
+  lastLogin?: Int
+  lastLogin_not?: Int
+  lastLogin_in?: Int[] | Int
+  lastLogin_not_in?: Int[] | Int
+  lastLogin_lt?: Int
+  lastLogin_lte?: Int
+  lastLogin_gt?: Int
+  lastLogin_gte?: Int
+  lastLogout?: Int
+  lastLogout_not?: Int
+  lastLogout_in?: Int[] | Int
+  lastLogout_not_in?: Int[] | Int
+  lastLogout_lt?: Int
+  lastLogout_lte?: Int
+  lastLogout_gt?: Int
+  lastLogout_gte?: Int
 }
 
 /*
@@ -520,6 +664,9 @@ export interface UserPreviousValues {
   username: String
   email: String
   password: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
 }
 
 export interface BatchPayload {
@@ -549,6 +696,9 @@ export interface User extends Node {
   username: String
   email: String
   password: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
 }
 
 /*

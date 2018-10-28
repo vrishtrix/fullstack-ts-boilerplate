@@ -172,6 +172,60 @@
         }
       }
     },
+    "universal": {
+      "root": "apps/universal",
+      "sourceRoot": "apps/universal/src",
+      "projectType": "application",
+      "prefix": "universal",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/builders:node-build",
+          "options": {
+            "outputPath": "dist/apps/universal",
+            "main": "apps/universal/src/main.ts",
+            "tsConfig": "apps/universal/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/universal/src/environments/environment.ts",
+                  "with": "apps/universal/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/builders:node-execute",
+          "options": {
+            "buildTarget": "universal:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/api/tsconfig.app.json",
+              "apps/api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/api/jest.config.js",
+            "tsConfig": "apps/api/tsconfig.spec.json"
+          }
+        }
+      }
+    },
     "schemas": {
       "root": "libs/schemas",
       "sourceRoot": "libs/schemas/src",
@@ -403,11 +457,11 @@
       "prefix": "kubic",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/auth/src/test.ts",
+            "jestConfig": "libs/auth/jest.config.js",
             "tsConfig": "libs/auth/tsconfig.spec.json",
-            "karmaConfig": "libs/auth/jest.config.js"
+            "setupFile": "libs/auth/src/test-setup.ts"
           }
         },
         "lint": {
@@ -431,11 +485,11 @@
       "prefix": "kubic",
       "architect": {
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/login/src/test.ts",
+            "jestConfig": "libs/login/jest.config.js",
             "tsConfig": "libs/login/tsconfig.spec.json",
-            "karmaConfig": "libs/login/jest.config.js"
+            "setupFile": "libs/login/src/test-setup.ts"
           }
         },
         "lint": {
@@ -476,6 +530,33 @@
             "jestConfig": "libs/logout/jest.config.js",
             "tsConfig": "libs/logout/tsconfig.spec.json",
             "setupFile": "libs/logout/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "server": {
+      "root": "libs/server",
+      "sourceRoot": "libs/server/src",
+      "projectType": "library",
+      "prefix": "kubic",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "main": "libs/server/src/test.ts",
+            "tsConfig": "libs/server/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/server/tsconfig.lib.json",
+              "libs/server/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }

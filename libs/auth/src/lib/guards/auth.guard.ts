@@ -2,7 +2,7 @@ import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 
-import { AuthState } from './auth.state';
+import { AuthState } from '../auth.state';
 
 @Injectable()
 export class IsNotAuthenticatedGuard implements CanActivate {
@@ -15,7 +15,7 @@ export class IsNotAuthenticatedGuard implements CanActivate {
 }
 
 @Injectable()
-export class IsAuthenticatedGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private readonly store: Store) {}
 
   canActivate() {

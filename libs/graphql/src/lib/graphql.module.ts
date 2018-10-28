@@ -1,37 +1,45 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { setContext } from 'apollo-link-context';
-import { LocalStorage } from '@ngx-pwa/local-storage';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Apollo, ApolloModule } from 'apollo-angular';
+import { Store } from '@ngxs/store';
+import { AuthState } from '@kubic/auth';
 
 @NgModule({
-  imports: [CommonModule, ApolloModule, HttpLinkModule]
+  imports: [
+    CommonModule,
+    ApolloModule,
+    HttpLinkModule,
+  ],
 })
-export class GraphqlModule {
-  constructor(apollo: Apollo, httpLink: HttpLink, localStorage: LocalStorage) {
+export class GraphqlModule implements OnInit {
+  constructor(
+    private readonly apollo: Apollo,
+    private readonly httpLink: HttpLink,
+    private readonly store: Store,
+  ) {}
+
+  ngOnInit() {
     const cache = new InMemoryCache();
-    const http = httpLink.create({
+    const http = this.httpLink.create({
       uri: 'http://localhost:3000/graphql',
-      // withCredentials: true,
+      withCredentials: true,
     });
 
-    /*const auth = setContext(async (_, headers) => {
-      const token = await localStorage.getItem<string>('token').toPromise();
-
-
-      if (!token) return {
-        headers: headers.append('Origin', 'http://localhost:4200'),
-      };
+    const auth = setContext((_, { headers }) => {
+      const token = this.store.selectSnapshot(AuthState.token);
 
       return {
-        headers: headers.append('Authorization', `Bearer ${token}`),
+        ...headers,
+        'Origin': 'http://localhost:4200',
+        'Authorization': `Bearer ${token}`
       };
-    });*/
+    });
 
-    apollo.create({
-      link: http,
+    this.apollo.create({
+      link: auth.concat(http),
       cache,
     });
   }
