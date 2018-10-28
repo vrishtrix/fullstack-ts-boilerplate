@@ -3,7 +3,7 @@ import * as helmet from 'helmet';
 import * as session from 'express-session';
 import * as RedisStore from 'connect-redis';
 import * as csurf from 'csurf';
-import { environment } from '@env/api';
+import { environment } from '@kubic/env/api';
 
 export async function createServer(module: any) {
   const app = await NestFactory.create(module);

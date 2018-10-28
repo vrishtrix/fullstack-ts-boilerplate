@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { environment } from '@env/api';
+import { environment } from '@kubic/env/api';
 
 import { JwtStrategy } from './jwt.strategy';
 import { UserModule } from '../user/user.module';

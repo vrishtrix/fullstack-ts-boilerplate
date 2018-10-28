@@ -18,14 +18,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@env/api": [
-        "apps/api/src/environments/environment"
+      "@kubic/env/*": [
+        "apps/*/src/environments/environment"
       ],
-      "@env/web": [
-        "apps/web/src/environments/environment"
-      ],
-      "@kubic/web": [
-        "apps/web/src/index.ts"
+      "@kubic/apps/*": [
+        "apps/*/src/index.ts"
       ],
       "@kubic/schemas": [
         "libs/schemas/src/index.ts"

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from '@env/web';
+import { environment } from '@kubic/env/web';
 
 @Component({
   selector: 'kubic-home-header',

@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { environment } from '@env/api';
+import { environment } from '@kubic/env/api';
 
 import { UserService } from '../user';
 import { JwtPayload } from './interfaces';

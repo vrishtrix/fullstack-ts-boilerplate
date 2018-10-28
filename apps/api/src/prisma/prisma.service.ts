@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@kubic/schemas/prisma';
-import { environment } from '@env/api';
+import { environment } from '@kubic/env/api';
 
 @Injectable()
 export class PrismaService extends Prisma {

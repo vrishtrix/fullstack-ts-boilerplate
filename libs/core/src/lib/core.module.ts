@@ -12,7 +12,7 @@ import { NgxsModule } from '@ngxs/store';
 import { GraphqlModule } from '@kubic/graphql';
 import { I18nModule } from '@kubic/i18n';
 import { AuthModule } from '@kubic/auth';
-import { environment } from '@env/web';
+import { environment } from '@kubic/env/web';
 
 import { CoreService } from './services/core.service';
 

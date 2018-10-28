@@ -3,7 +3,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserModule } from '@angular/platform-browser';
 import { CoreModule } from '@kubic/core';
 import { NgModule } from '@angular/core';
-import { environment } from '@env/web';
+import { environment } from '@kubic/env/web';
 import { NxModule } from '@nrwl/nx';
 
 import { PreloadSelectedModulesList } from './preloading-strategy';

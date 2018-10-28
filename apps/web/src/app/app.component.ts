@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { environment } from '@env/web';
+import { environment } from '@kubic/env/web';
 import { Store } from '@ngxs/store';
 // import { AuthCheck } from '@kubic/auth';
 

@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { environment } from '@env/web';
+import { environment } from '@kubic/env/web';
 import { ClrLoadingState } from '@clr/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { AuthLogin } from '@kubic/auth';
-import { catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ApolloError } from 'apollo-client';
 import { CoreService } from '@kubic/core';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'kubic-home-login',
@@ -56,9 +54,5 @@ export class LoginComponent {
       () => this.handleLoginSuccess(),
       (err) => this.handleLoginError(err),
     );
-
-    /*  catchError(err => this.handleLoginError(err)),
-      tap(),
-    ).subscribe();*/
   }
 }
