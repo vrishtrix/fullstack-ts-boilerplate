@@ -2,6 +2,7 @@ type User {
   id: ID
   password: String!
   username: String!
+  roles: [Role]!
   email: String!
   token: String
   lastLogin: Int

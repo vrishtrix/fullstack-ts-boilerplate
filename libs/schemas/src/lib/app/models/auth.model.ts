@@ -3,9 +3,10 @@ import gql from 'graphql-tag';
 export const authFragments = {
   user: gql`
     fragment UserResponse on User {
-      id,
-      username,
+      id
+      username
       email
+      roles
     }
   `,
   /*authPayload: gql`
@@ -25,7 +26,7 @@ export const LOGIN_MUTATION = gql`
     login(email: $email, password: $password) {
       user {
         ...UserResponse 
-      },
+      }
       token
     }
   }
@@ -37,7 +38,7 @@ export const SIGNUP_MUTATION = gql`
     signup(username: $username, email: $email, password: $password) {
       user {
         ...UserResponse
-      },
+      }
       token
     }
   }

@@ -2,8 +2,9 @@ version: '3'
 services:
   redis:
     image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
-      - redis:/usr/local/etc/redis/redis.conf
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - '6379:6379'
   prisma:
@@ -33,5 +34,5 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 volumes:
-  redis:
+  # redis:
   postgres:

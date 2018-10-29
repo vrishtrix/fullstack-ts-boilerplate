@@ -1,25 +1,25 @@
-import { CanActivate } from '@angular/router';
+import { CanActivate, CanLoad } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 
 import { AuthState } from '../auth.state';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
-export class IsNotAuthenticatedGuard implements CanActivate {
-  constructor(private readonly store: Store) {}
+export class AuthGuard implements CanActivate, CanLoad {
+  @Select(AuthState.token)
+  private readonly token$: Observable<string | undefined>;
 
-  canActivate() {
-    const token = this.store.selectSnapshot(AuthState.token);
-    return !token;
+  private validToken() {
+    return this.token$.pipe(map(token => !!token));
   }
-}
 
-@Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private readonly store: Store) {}
+  canLoad() {
+    return this.validToken();
+  }
 
   canActivate() {
-    const token = this.store.selectSnapshot(AuthState.token);
-    return !!token;
+    return this.validToken();
   }
 }

@@ -112,6 +112,11 @@ type Query {
   ): Node
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -124,6 +129,7 @@ type User implements Node {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: [Role!]!
 }
 
 """A connection to a list of items."""
@@ -143,6 +149,11 @@ input UserCreateInput {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: UserCreaterolesInput
+}
+
+input UserCreaterolesInput {
+  set: [Role!]
 }
 
 """An edge in a connection."""
@@ -183,6 +194,7 @@ type UserPreviousValues {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: [Role!]!
 }
 
 type UserSubscriptionPayload {
@@ -231,6 +243,11 @@ input UserUpdateInput {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: UserUpdaterolesInput
+}
+
+input UserUpdaterolesInput {
+  set: [Role!]
 }
 
 input UserWhereInput {
@@ -501,6 +518,10 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
+
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
   'username_ASC' |
@@ -520,9 +541,8 @@ export type UserOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
+export type Role =   'USER' |
+  'ADMIN'
 
 export interface UserCreateInput {
   username: String
@@ -531,32 +551,7 @@ export interface UserCreateInput {
   lastToken?: String
   lastLogin?: Int
   lastLogout?: Int
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  username?: String
-  email?: String
-}
-
-export interface UserUpdateInput {
-  username?: String
-  email?: String
-  password?: String
-  lastToken?: String
-  lastLogin?: Int
-  lastLogout?: Int
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
+  roles?: UserCreaterolesInput
 }
 
 export interface UserWhereInput {
@@ -651,12 +646,60 @@ export interface UserWhereInput {
   lastLogout_gte?: Int
 }
 
+export interface UserCreaterolesInput {
+  set?: Role[] | Role
+}
+
+export interface UserUpdateInput {
+  username?: String
+  email?: String
+  password?: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
+  roles?: UserUpdaterolesInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  username?: String
+  email?: String
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface UserUpdaterolesInput {
+  set?: Role[] | Role
+}
+
 /*
  * An object with an ID
 
  */
 export interface Node {
   id: ID_Output
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface BatchPayload {
+  count: Long
 }
 
 export interface UserPreviousValues {
@@ -667,10 +710,39 @@ export interface UserPreviousValues {
   lastToken?: String
   lastLogin?: Int
   lastLogout?: Int
+  roles: Role[]
 }
 
-export interface BatchPayload {
-  count: Long
+export interface UserSubscriptionPayload {
+  mutation: MutationType
+  node?: User
+  updatedFields?: String[]
+  previousValues?: UserPreviousValues
+}
+
+export interface AggregateUser {
+  count: Int
+}
+
+export interface User extends Node {
+  id: ID_Output
+  username: String
+  email: String
+  password: String
+  lastToken?: String
+  lastLogin?: Int
+  lastLogout?: Int
+  roles: Role[]
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
 /*
@@ -684,50 +756,11 @@ export interface PageInfo {
   endCursor?: String
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType
-  node?: User
-  updatedFields?: String[]
-  previousValues?: UserPreviousValues
-}
-
-export interface User extends Node {
-  id: ID_Output
-  username: String
-  email: String
-  password: String
-  lastToken?: String
-  lastLogin?: Int
-  lastLogout?: Int
-}
-
 /*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
-}
-
-export interface AggregateUser {
-  count: Int
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-  node: User
-  cursor: String
-}
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type Boolean = boolean
+export type ID_Input = string | number
+export type ID_Output = string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -746,7 +779,6 @@ Long can represent values between -(2^63) and 2^63 - 1.
 export type Long = string
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type ID_Input = string | number
-export type ID_Output = string
+export type Boolean = boolean

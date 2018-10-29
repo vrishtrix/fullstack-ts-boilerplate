@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { RedisModule } from '@kubic/server';
-
-import { AppController } from './app.controller';
+import { AngularUniversalModule } from '@nestjs/ng-universal';
 
 @Module({
-  imports: [RedisModule],
-  controllers: [AppController],
+  imports: [
+    AngularUniversalModule.forRoot({
+      viewsPath: BROWSER_DIR,
+      bundle: require('./../dist/server/main.js'),
+    }),
+  ],
 })
 export class AppModule {}

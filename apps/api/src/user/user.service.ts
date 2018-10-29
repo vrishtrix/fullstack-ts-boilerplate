@@ -8,14 +8,6 @@ import { PrismaService } from '../prisma';
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  public updateToken(id: string, token: string) {
-    const lastLogin = new Date().getTime();
-    return this.update({
-      data: { lastToken: token },
-      where: { id },
-    });
-  }
-
   public update(args: { data: UserUpdateInput, where: UserWhereUniqueInput }) {
     return this.prisma.mutation.updateUser(args);
   }

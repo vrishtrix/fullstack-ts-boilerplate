@@ -1,3 +1,3 @@
 export * from './interfaces';
 export * from './auth.module';
-export * from './guards';
+export * from './graphql-auth.guard';

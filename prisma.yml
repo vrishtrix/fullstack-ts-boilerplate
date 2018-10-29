@@ -1,9 +1,10 @@
 endpoint: http://localhost:4466
 secret: H@llox1234
 datamodel:
-  - ../../libs/schemas/src/lib/prisma/models/user.graphql
+  - libs/schemas/src/lib/shared/enums.graphql
+  - libs/schemas/src/lib/prisma/models/user.graphql
 seed:
-  import: ../../libs/schemas/src/lib/prisma/seed.graphql
+  import: libs/schemas/src/lib/prisma/seed.graphql
 hooks:
   post-deploy:
     - sudo graphql get-schema --project database

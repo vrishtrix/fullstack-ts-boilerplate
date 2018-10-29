@@ -1,6 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserTransferStateModule, BrowserModule } from '@angular/platform-browser';
+import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CoreModule } from '@kubic/core';
 import { NgModule } from '@angular/core';
 import { environment } from '@kubic/env/web';
@@ -11,20 +12,19 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 
 @NgModule({
+  providers: [PreloadSelectedModulesList],
+  bootstrap: [AppComponent],
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({
+      appId: 'foretag-kubic',
+    }),
+    TransferHttpCacheModule,
+    BrowserTransferStateModule,
     BrowserAnimationsModule,
     NxModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
     AppRouting,
     CoreModule,
   ],
-  providers: [
-    PreloadSelectedModulesList,
-  ],
-  bootstrap: [AppComponent]
 })
 export class AppModule {}

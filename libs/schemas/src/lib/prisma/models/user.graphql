@@ -6,4 +6,5 @@ type User {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: [Role]!
 }

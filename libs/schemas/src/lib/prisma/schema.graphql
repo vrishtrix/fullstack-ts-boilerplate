@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Oct 23 2018 21:53:31 GMT+0100 (GMT+01:00)
+# timestamp: Mon Oct 29 2018 15:57:20 GMT+0100 (GMT+01:00)
 
 type AggregateUser {
   count: Int!
@@ -64,6 +64,11 @@ type Query {
   ): Node
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
@@ -76,6 +81,7 @@ type User implements Node {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: [Role!]!
 }
 
 """A connection to a list of items."""
@@ -95,6 +101,11 @@ input UserCreateInput {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: UserCreaterolesInput
+}
+
+input UserCreaterolesInput {
+  set: [Role!]
 }
 
 """An edge in a connection."""
@@ -135,6 +146,7 @@ type UserPreviousValues {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: [Role!]!
 }
 
 type UserSubscriptionPayload {
@@ -183,6 +195,11 @@ input UserUpdateInput {
   lastToken: String
   lastLogin: Int
   lastLogout: Int
+  roles: UserUpdaterolesInput
+}
+
+input UserUpdaterolesInput {
+  set: [Role!]
 }
 
 input UserWhereInput {

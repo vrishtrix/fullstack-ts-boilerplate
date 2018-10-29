@@ -15,6 +15,7 @@ export interface IQuery {
 
 export interface User {
     id?: string;
+    roles?: string[];
     password: string;
     username: string;
     email: string;

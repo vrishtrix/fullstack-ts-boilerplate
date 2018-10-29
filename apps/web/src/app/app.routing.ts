@@ -1,15 +1,11 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import {
-  AuthGuard,
-  IsNotAuthenticatedGuard,
-} from '@kubic/auth';
+import { AuthGuard } from '@kubic/auth';
 
 const routes: Routes = [
     {
       path: 'login',
       loadChildren: '@kubic/login#LoginModule',
-      canActivate: [IsNotAuthenticatedGuard],
       data: { preload: true },
     },
     {

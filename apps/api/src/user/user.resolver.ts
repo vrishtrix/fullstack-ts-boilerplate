@@ -1,11 +1,12 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserInputError } from 'apollo-server';
-import { UseGuards } from '@nestjs/common';
+import { Req, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '@kubic/schemas';
+import { Request } from 'express';
 import * as bcrypt from 'bcryptjs';
 
-import { GqlAuthGuard } from '../auth/guards/graphql-auth.guard';
+import { GqlAuthGuard } from '../auth';
 import { UserService } from './user.service';
 
 @Resolver('User')
@@ -19,28 +20,48 @@ export class UserResolver {
     return Object.keys(validationErrors).length > 0;
   }
 
-  private throwValidationErrors(mutation: string, validationErrors: object) {
+  private throwValidationErrors(action: string, validationErrors: object) {
     throw new UserInputError(
-      `Failed to ${mutation} due to validation errors`,
+      `Failed to ${action} due to validation errors`,
       { validationErrors },
     );
   }
 
-  private createToken(user: User) {
-    return this.jwt.sign({
-      id: user.id,
+  private createToken(req: Request, user: User) {
+    const token = this.jwt.sign({
       hash: user.password,
+      id: user.id,
     });
+
+    req['session'].authToken = token;
+    return token;
   }
 
   @Query()
   @UseGuards(GqlAuthGuard)
-  async findUser(@Args('username') username: string) {
-    return await this.user.find({ username });
+  findUser(@Args('username') username: string): Promise<User | null> {
+    if (!username) {
+      this.throwValidationErrors('findUser', {
+        username: 'Username is required',
+      });
+    }
+
+    return this.user.find({ username });
   }
 
   @Mutation()
-  async login(@Args() { email, password }: User) {
+  @UseGuards(GqlAuthGuard)
+  logout(@Req() req: Request) {
+    return new Promise(resolve => {
+      req['session'].destroy(resolve)
+    });
+  }
+
+  @Mutation()
+  async login(
+    @Args() { email, password }: User,
+    @Req() req: Request,
+  ) {
     const user = await this.user.find({ email });
     if (!user) {
       this.throwValidationErrors('login', {
@@ -55,8 +76,7 @@ export class UserResolver {
       });
     }
 
-    const token = this.jwt.sign({ id: user.id });
-    await this.user.updateToken(user.id, token);
+    const token = this.createToken(req, user);
 
     return {
       token,
@@ -65,7 +85,10 @@ export class UserResolver {
   }
 
   @Mutation()
-  async signup(@Args() { email, username, password }: User) {
+  async signup(
+    @Args() { email, username, password }: User,
+    @Req() req: Request,
+  ) {
     const errors: any = {};
 
     if (password.length < 6) {
@@ -92,12 +115,7 @@ export class UserResolver {
       password,
     });
 
-    const token = this.jwt.sign({
-      id: user.id,
-      hash: user.password,
-    });
-
-    await this.user.updateToken(user.id, token);
+    const token = this.createToken(req, user);
 
     return {
       token,
