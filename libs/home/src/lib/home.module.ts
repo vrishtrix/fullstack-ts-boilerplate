@@ -4,12 +4,12 @@ import { SharedModule } from '@kubic/shared';
 
 // import { HomeRouting } from './home.routing';
 import { HeaderComponent } from './components';
-import {
+/*import {
   // LoginComponent,
   HomeLayoutComponent,
   // LandingComponent,
   // PricingComponent
-} from './containers';
+} from './containers';*/
 
 @NgModule({
   exports: [

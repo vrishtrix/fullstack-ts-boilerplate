@@ -7,5 +7,5 @@ import { environment } from '@kubic/env/web';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  protected title = environment.app.name;
+  title = environment.app.name;
 }

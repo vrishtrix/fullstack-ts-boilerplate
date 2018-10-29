@@ -1,11 +1,11 @@
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { ClarityModule, ClrFormsNextModule } from '@clr/angular';
-import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgxsStoragePluginModule, STORAGE_ENGINE } from '@ngxs/storage-plugin';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxPageScrollModule } from 'ngx-page-scroll';
+// import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { CommonModule } from '@angular/common';
 import { NgxsModule } from '@ngxs/store';
 
@@ -15,6 +15,8 @@ import { AuthModule } from '@kubic/auth';
 import { environment } from '@kubic/env/web';
 
 import { CoreService } from './services/core.service';
+import { CustomStorage } from './services/custom-storage.service';
+import { NgxsStoragePluginOptions } from '@ngxs/storage-plugin/src/symbols';
 
 @NgModule({
   providers: [
@@ -27,7 +29,7 @@ import { CoreService } from './services/core.service';
   imports: [
     CommonModule,
     HttpClientModule,
-    NgxPageScrollModule,
+    // NgxPageScrollModule,
     NgxsModule.forRoot([]),
     NgxsFormPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
@@ -35,7 +37,6 @@ import { CoreService } from './services/core.service';
     ClrFormsNextModule,
     GraphqlModule,
     AuthModule,
-
     I18nModule,
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production,
@@ -55,6 +56,28 @@ export class CoreModule {
       throw new Error(
         'CoreModule is already loaded. Import it in the AppModule only'
       );
+    }
+  }
+
+  private static createStorageModule(options: NgxsStoragePluginOptions = {}) {
+    return
+  }
+
+  public static forBrowser() {
+    return {
+      ngModule: CoreModule,
+    };
+  }
+
+  public static forServer(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [
+        {
+          provide: STORAGE_ENGINE,
+          useClass: CustomStorage
+        },
+      ],
     }
   }
 }

@@ -38,7 +38,7 @@ export class UserResolver {
   }
 
   @Query()
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   findUser(@Args('username') username: string): Promise<User | null> {
     if (!username) {
       this.throwValidationErrors('findUser', {
@@ -49,13 +49,13 @@ export class UserResolver {
     return this.user.find({ username });
   }
 
-  @Mutation()
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
+  /*@Mutation()
   logout(@Req() req: Request) {
     return new Promise(resolve => {
       req['session'].destroy(resolve)
     });
-  }
+  }*/
 
   @Mutation()
   async login(

@@ -20,9 +20,6 @@ import { UserModule } from '../user/user.module';
       },
     }),
   ],
-  providers: [
-    <any>JwtStrategy,
-  ],
 })
 export class AuthModule {}
 

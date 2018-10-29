@@ -7,15 +7,15 @@ import { environment } from '@kubic/env/api';
 
 export async function createServer(module: any) {
   const app = await NestFactory.create(module);
-  const store = new RedisStore(session)(environment.redis);
+  const store = new (RedisStore(session))(environment.redis);
 
   app.use(helmet());
   app.use(session({
     ...environment.session,
     store,
   }));
-  app.use(csurf());
   app.enableCors();
+  app.use(csurf());
 
   return app;
 }

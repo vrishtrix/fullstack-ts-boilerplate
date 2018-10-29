@@ -1,10 +1,11 @@
-import { ApplicationRef, NgModule } from '@angular/core';
-import { ServerModule } from '@angular/platform-server';
+import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
+import { APP_BOOTSTRAP_LISTENER, ApplicationRef, NgModule } from '@angular/core';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
-import { ServerTransferStateModule } from '@angular/platform-server';
+import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TransferState } from '@angular/platform-browser';
 import { filter, first } from 'rxjs/operators';
-// import { Request } from 'express';
+import { CoreModule } from '@kubic/core';
+import { Request } from 'express';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
@@ -13,7 +14,7 @@ import { IRequest, REQ_KEY } from './request';
 export const bootstrapFactory = (
   appRef: ApplicationRef,
   transferState: TransferState,
-  req: any, // Request
+  req: Request,
 ) => {
   return appRef.isStable.pipe(
     filter(stable => stable),
@@ -24,8 +25,8 @@ export const bootstrapFactory = (
       originalUrl: req.originalUrl,
       referer: req.get('referer'),
       token: {
-        csrf: req.csrfToken(),
-        jwt: req.session['authToken'],
+        csrf: req['csrfToken'](),
+        jwt: req['session']['authToken'],
       },
     });
   });
@@ -37,7 +38,20 @@ export const bootstrapFactory = (
     ServerModule,
     ModuleMapLoaderModule,
     ServerTransferStateModule,
+    CoreModule.forServer(),
   ],
   bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: APP_BOOTSTRAP_LISTENER,
+      useFactory: bootstrapFactory,
+      multi: true,
+      deps: [
+        ApplicationRef,
+        TransferState,
+        REQUEST,
+      ],
+    },
+  ],
 })
 export class AppServerModule {}

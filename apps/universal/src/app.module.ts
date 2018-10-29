@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AngularUniversalModule } from '@nestjs/ng-universal';
 
+import { webFolder, webServerFolder } from './utils';
+
 @Module({
   imports: [
     AngularUniversalModule.forRoot({
-      viewsPath: BROWSER_DIR,
-      bundle: require('./../dist/server/main.js'),
+      viewsPath: webFolder(),
+      bundle: require(webServerFolder('main.js')),
     }),
   ],
 })

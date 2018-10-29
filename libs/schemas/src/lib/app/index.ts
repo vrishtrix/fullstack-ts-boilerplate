@@ -1,3 +1,8 @@
+export enum Role {
+    USER = "USER",
+    ADMIN = "ADMIN"
+}
+
 export interface AuthPayload {
     token?: string;
     user?: User;
@@ -15,8 +20,11 @@ export interface IQuery {
 
 export interface User {
     id?: string;
-    roles?: string[];
     password: string;
     username: string;
+    roles?: Role[];
     email: string;
+    token?: string;
+    lastLogin?: number;
+    lastLogout?: number;
 }

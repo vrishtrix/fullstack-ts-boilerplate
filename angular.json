@@ -90,24 +90,11 @@
           }
         },
         "server": {
-          "builder": "@@angular-devkit/build-angular:server",
+          "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/server",
+            "outputPath": "dist/web-server",
             "main": "apps/web/src/main.server.ts",
-            "tsConfig": "apps/web/src/tsconfig.server.json",
-            "assets": [
-              "apps/web/src/favicon.ico",
-              "apps/web/src/assets"
-            ],
-            "styles": [
-              "node_modules/@clr/icons/clr-icons.min.css",
-              "node_modules/@clr/ui/clr-ui.min.css",
-              "apps/web/src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/@webcomponents/custom-elements/custom-elements.min.js",
-              "node_modules/@clr/icons/clr-icons.min.js"
-            ]
+            "tsConfig": "apps/web/tsconfig.server.json"
           },
           "configurations": {
             "production": {

@@ -6,8 +6,6 @@ import { Observable } from 'rxjs';
 import { AuthLogin, AuthLogout } from './auth.actions';
 import { AuthService } from './auth.service';
 
-// https://ngxs.gitbook.io/ngxs/recipes/authentication
-
 @State<AuthPayload>({
   name: 'auth',
 })

@@ -1,10 +1,8 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserTransferStateModule, BrowserModule } from '@angular/platform-browser';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { CoreModule } from '@kubic/core';
 import { NgModule } from '@angular/core';
-import { environment } from '@kubic/env/web';
 import { NxModule } from '@nrwl/nx';
 
 import { PreloadSelectedModulesList } from './preloading-strategy';
@@ -24,7 +22,7 @@ import { AppRouting } from './app.routing';
     BrowserAnimationsModule,
     NxModule.forRoot(),
     AppRouting,
-    CoreModule,
+    CoreModule.forBrowser(),
   ],
 })
 export class AppModule {}
