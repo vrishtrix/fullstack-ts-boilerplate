@@ -1,13 +1,11 @@
-endpoint: http://localhost:4466
-secret: H@llox1234
+endpoint: ${env:PRISMA_HOST}:${env:PRISMA_PORT}
+secret: ${env:PRISMA_SECRET}
 datamodel:
-  - libs/schemas/src/lib/shared/enums.graphql
-  - libs/schemas/src/lib/prisma/models/user.graphql
+  - ${env:SHARED_SCHEMA_PATH}/enums.graphql
+  - ${env:PRISMA_SCHEMA_PATH}/models/user.graphql
 seed:
-  import: libs/schemas/src/lib/prisma/seed.graphql
+  import: ${env:PRISMA_SCHEMA_PATH}/seed.graphql
 hooks:
   post-deploy:
     - sudo graphql get-schema --project database
     - sudo graphql codegen --project database
-#    - sudo graphql get-schema --project app
-#    - sudo graphql codegen --project app

@@ -5,8 +5,8 @@ import { AppModule } from './app/app.module';
 
 createServer({
   bootstrap: AppModule,
-  name: `${environment.app.name} HMR`,
-  port: 8080,
+  name: `${environment.apps.api.name} HMR`,
+  port: environment.apps.api.port,
 }).then((app: NestApp) => {
   if (environment.hmr) {
     module.hot.accept();

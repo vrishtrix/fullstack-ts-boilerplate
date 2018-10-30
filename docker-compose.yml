@@ -6,35 +6,38 @@ services:
     volumes:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
-      - '6379:6379'
+      - ${REDIS_PORT}:${REDIS_PORT}
     environment:
-      name: kubic-redis
+      name: ${REDIS_NAME}
+      password: ${REDIS_PASS}
   prisma:
     image: prismagraphql/prisma:1.16
     restart: always
     depends_on:
       - postgres
     ports:
-      - '4466:4466'
+      - ${PRISMA_PORT}:${PRISMA_PORT}
     environment:
       PRISMA_CONFIG: |
-        port: 4466
+        port: ${PRISMA_PORT}
         databases:
           default:
             connector: postgres
             host: postgres
-            port: 5432
-            user: prisma
-            password: prisma
+            port: ${POSTGRES_PORT}
+            user: ${POSTGRES_USER}
+            password: ${POSTGRES_PASS}
             migrations: true
   postgres:
     image: postgres:10.5
     restart: always
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     environment:
-      POSTGRES_USER: prisma
-      POSTGRES_PASSWORD: prisma
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+      POSTGRES_PORT: ${POSTGRES_PORT}
     volumes:
       - postgres:/var/lib/postgresql/data
 volumes:
-  # redis:
   postgres:

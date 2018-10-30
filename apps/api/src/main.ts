@@ -5,6 +5,5 @@ import { AppModule } from './app/app.module';
 
 createServer({
   bootstrap: AppModule,
-  autoStart: false,
-  name: environment.app.name,
+  ...environment.apps.api,
 }).catch(console.error);

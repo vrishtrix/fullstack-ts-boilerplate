@@ -1,11 +1,18 @@
-const secret = 'H@llox1234';
+const secret = process.env.APP_SECRET;
 
 export const createEnv = (env: any = {}) => ({
   production: false,
   hmr: false,
   secret,
-  app: {
-    name: 'Kubic API',
+  apps: {
+    api: {
+      name: process.env.API_NAME,
+      port: +process.env.API_PORT,
+    },
+    ssr: {
+      name: process.env.SSR_NAME,
+      port: +process.env.SSR_PORT,
+    },
   },
   session: {
     resave: false,
@@ -14,13 +21,14 @@ export const createEnv = (env: any = {}) => ({
     secret,
   },
   redis: {
-    host: '127.0.0.1',
-    port: 6379,
+    host: process.env.REDIS_HOST,
+    port: +process.env.REDIS_PORT,
+    db: +process.env.REDIS_DB,
   },
   prisma: {
-    endpoint: 'http://localhost:4466',
+    endpoint: `${process.env.PRISMA_HOST}:${process.env.PRISMA_PORT}`,
+    secret: process.env.PRISMA_SECRET,
     debug: true,
-    secret,
   },
   ...env,
 });
