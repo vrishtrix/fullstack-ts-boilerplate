@@ -13,6 +13,10 @@ export const createEnv = (env: any = {}) => ({
       name: process.env.SSR_NAME,
       port: +process.env.SSR_PORT,
     },
+    web: {
+      name: process.env.APP_NAME,
+      title: process.env.APP_DEFAULT_TITLE,
+    },
   },
   session: {
     resave: false,

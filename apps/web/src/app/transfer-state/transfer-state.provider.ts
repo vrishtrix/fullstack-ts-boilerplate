@@ -2,10 +2,10 @@ import { FactoryProvider } from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { TransferState } from '@angular/platform-browser';
 
-import { requestFactory } from './request.factory';
+import { transferStateFactory } from './transfer-state-factory';
 
-export const requestProvider: FactoryProvider = {
+export const transferStateProvider: FactoryProvider = {
   provide: REQUEST,
-  useFactory: requestFactory,
+  useFactory: transferStateFactory,
   deps: [TransferState],
 };

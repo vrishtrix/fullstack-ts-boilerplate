@@ -9,7 +9,7 @@ import { Request } from 'express';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { IRequest, REQ_KEY } from './request';
+import { TransferStateModel, TRANSFER_STATE_KEY } from './transfer-state';
 
 export const bootstrapFactory = (
   appRef: ApplicationRef,
@@ -20,15 +20,10 @@ export const bootstrapFactory = (
     filter(stable => stable),
     first(),
   ).subscribe(() => {
-    transferState.set<IRequest>(REQ_KEY, {
-      hostname: req.hostname,
-      originalUrl: req.originalUrl,
-      referer: req.get('referer'),
-      token: {
-        csrf: req['csrfToken'](),
-        jwt: req['session']['authToken'],
-      },
-    });
+    transferState.set<TransferStateModel>(
+      TRANSFER_STATE_KEY,
+      req.app.get('transferState'),
+    );
   });
 };
 

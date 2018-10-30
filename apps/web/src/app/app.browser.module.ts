@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '@kubic/env/web';
 
-import { requestProvider } from './request';
+import { transferStateProvider } from './transfer-state';
 import { AppModule } from './app.module';
 
 @NgModule({
@@ -12,6 +12,6 @@ import { AppModule } from './app.module';
       enabled: environment.production,
     }),
   ],
-  providers: [requestProvider],
+  providers: [transferStateProvider],
 })
 export class AppBrowserModule {}
