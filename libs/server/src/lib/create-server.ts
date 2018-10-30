@@ -19,9 +19,13 @@ export interface Server {
   start: () => Promise<void>;
 }
 
-export async function createServer(
-  { bootstrap, port = 3000, hostname = 'http://localhost', name, autoStart }: ServerOptions,
-): Promise<Server | void> {
+export async function createServer({
+ hostname = 'http://localhost',
+ autoStart = true,
+ port = 3000,
+ bootstrap,
+ name,
+}: ServerOptions): Promise<Server | void> {
   const app = await NestFactory.create(bootstrap);
   const store = new (RedisStore(session))(environment.redis);
 
