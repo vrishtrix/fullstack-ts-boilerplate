@@ -6,7 +6,7 @@ import { User } from '@kubic/schemas';
 import { Request } from 'express';
 import * as bcrypt from 'bcryptjs';
 
-import { GqlAuthGuard } from '../auth';
+import { GqlAuthGuard } from '../auth/index';
 import { UserService } from './user.service';
 
 @Resolver('User')

@@ -1,8 +1,15 @@
-import { AppModule } from './app.module';
 import { createServer } from '@kubic/server';
 
+import { AppModule } from './app/app.module';
+
 (async () => {
-  const app = await createServer(AppModule);
+  const { app, start } = await createServer({
+    bootstrap: AppModule,
+    autoStart: false,
+    name: 'API',
+  });
+
   app.useGlobalGuards();
-  await app.listen(3000);
+
+  await start();
 })();

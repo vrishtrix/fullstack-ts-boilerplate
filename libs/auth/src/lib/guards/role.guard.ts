@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Select } from '@ngxs/store';
-import { AuthState } from '@kubic/auth';
 import { User } from '@kubic/schemas';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
+
+import { AuthState } from '../auth.state';
 
 @Injectable()
 export class RoleGuard implements CanActivate {

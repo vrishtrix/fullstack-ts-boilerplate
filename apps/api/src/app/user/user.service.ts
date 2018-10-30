@@ -1,8 +1,8 @@
-import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@kubic/schemas/prisma';
+import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '../../../../../libs/schemas/src/lib/prisma/index';
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 
-import { PrismaService } from '../prisma';
+import { PrismaService } from '../prisma/index';
 
 @Injectable()
 export class UserService {
