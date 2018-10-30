@@ -1,7 +1,11 @@
 import { environment } from '@kubic/env/api';
-import { Request } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-export function transferStateMiddleware(req: Request) {
+export function transferStateMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   req.app.set('transferState', {
     hostname: req.hostname,
     originalUrl: req.originalUrl,
@@ -15,4 +19,6 @@ export function transferStateMiddleware(req: Request) {
       },
     },
   });
+
+  next();
 }

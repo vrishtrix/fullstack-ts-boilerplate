@@ -13,7 +13,6 @@ import { webFolder, webServerFolder } from './utils';
   ],
 })
 export class AppModule implements NestModule {
-
   configure(consumer: MiddlewareConsumer) {
     return consumer
       .apply(transferStateMiddleware)
