@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:dev:api": "ng serve api",
+    "start:dev:api": "nodemon --config ./apps/api/nodemon.json",
     "start:dev:web": "ng serve web",
     "start:hmr:api": "ng serve api --c hmr",
     "start:hmr:web": "ng serve web --c hmr",

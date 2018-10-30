@@ -6,6 +6,8 @@ import * as RedisStore from 'connect-redis';
 import * as csurf from 'csurf';
 import { environment } from '@kubic/env/api';
 
+export type NestApp = INestApplication & INestExpressApplication;
+
 export interface ServerOptions {
   bootstrap: any;
   name: string;
@@ -15,7 +17,7 @@ export interface ServerOptions {
 }
 
 export interface Server {
-  app: INestApplication & INestExpressApplication;
+  app: NestApp;
   start: () => Promise<void>;
 }
 
@@ -25,7 +27,7 @@ export async function createServer({
  port = 3000,
  bootstrap,
  name,
-}: ServerOptions): Promise<Server | void> {
+}: ServerOptions): Promise<NestApp | Server> {
   const app = await NestFactory.create(bootstrap);
   const store = new (RedisStore(session))(environment.redis);
 
@@ -37,12 +39,11 @@ export async function createServer({
   app.enableCors();
   app.use(csurf());
 
-  async function start() {
+  async function start(): Promise<NestApp> {
     await app.listenAsync(port, hostname);
     console.log(`${name} server started on ${hostname}:${port}`);
+    return app;
   }
 
-  return autoStart
-    ? await start()
-    : { app, start };
+  return autoStart ? await start() : (<Server>{ app, start });
 }

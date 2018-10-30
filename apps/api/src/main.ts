@@ -1,15 +1,10 @@
 import { createServer } from '@kubic/server';
 
+import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 
-(async () => {
-  const { app, start } = await createServer({
-    bootstrap: AppModule,
-    autoStart: false,
-    name: 'API',
-  });
-
-  app.useGlobalGuards();
-
-  await start();
-})();
+createServer({
+  bootstrap: AppModule,
+  autoStart: false,
+  name: environment.app.name,
+}).catch(console.error);
