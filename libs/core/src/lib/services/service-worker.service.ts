@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
-import { environment } from '@kubic/env/web';
+import { environment } from '@foretag/env/web';
 
 @Injectable(<any>{ // wtf?
   providedIn: 'root',

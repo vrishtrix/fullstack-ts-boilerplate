@@ -1,5 +1,5 @@
 {
-  "npmScope": "kubic",
+  "npmScope": "foretag",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",

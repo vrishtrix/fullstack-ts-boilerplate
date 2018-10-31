@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { environment } from '@kubic/env/web';
+import { environment } from '@foretag/env/web';
 import { ClrLoadingState } from '@clr/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { AuthLogin } from '@kubic/auth';
+import { AuthLogin } from '@foretag/auth';
 import { Router } from '@angular/router';
 import { ApolloError } from 'apollo-client';
-import { CoreService } from '@kubic/core';
+import { CoreService } from '@foretag/core';
 
 @Component({
-  selector: 'kubic-home-login',
+  selector: 'foretag-home-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HomeModule } from '@kubic/home';
+import { HomeModule } from '@foretag/home';
 
 import { LoginComponent } from './login.component';
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { environment } from '@kubic/server';
+import { environment } from '@foretag/server';
 
 export function transferStateMiddleware(
   req: Request,

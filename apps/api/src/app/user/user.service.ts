@@ -1,4 +1,4 @@
-import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@kubic/schemas/prisma';
+import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@foretag/schemas/prisma';
 import { Injectable } from '@nestjs/common';
 import * as argon2 from 'argon2';
 

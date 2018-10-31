@@ -2,7 +2,7 @@ import { UserInputError } from 'apollo-server';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { User } from '@kubic/schemas/prisma';
+import { User } from '@foretag/schemas/prisma';
 
 @Injectable()
 export class AppService {

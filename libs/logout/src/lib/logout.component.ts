@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'kubic-logout',
+  selector: 'foretag-logout',
   template: '<div>Logging out...</div>',
 })
 export class LogoutComponent {}

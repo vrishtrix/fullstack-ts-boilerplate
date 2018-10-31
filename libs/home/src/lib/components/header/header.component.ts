@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { environment } from '@kubic/env/web';
+import { environment } from '@foretag/env/web';
 
 @Component({
-  selector: 'kubic-home-header',
+  selector: 'foretag-home-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Req, UseGuards } from '@nestjs/common';
-import { User } from '@kubic/schemas/prisma';
+import { User } from '@foretag/schemas/prisma';
 import { Request } from 'express';
 import * as argon2 from 'argon2';
 

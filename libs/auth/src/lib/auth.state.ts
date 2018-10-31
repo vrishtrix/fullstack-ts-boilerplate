@@ -1,6 +1,6 @@
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
-import { TRANSFER_STATE_TOKEN, TransferStateModel } from '@kubic/transfer-state';
-import { AuthPayload } from '@kubic/schemas';
+import { TRANSFER_STATE_TOKEN, TransferStateModel } from '@foretag/transfer-state';
+import { AuthPayload } from '@foretag/schemas';
 import { Inject } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';

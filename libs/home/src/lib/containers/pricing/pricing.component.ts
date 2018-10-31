@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'kubic-home-pricing',
+  selector: 'foretag-home-pricing',
   templateUrl: './pricing.component.html'
 })
 export class PricingComponent {}

@@ -5,7 +5,7 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { Store } from '@ngxs/store';
-import { AuthState } from '@kubic/auth';
+import { AuthState } from '@foretag/auth';
 
 @NgModule({
   imports: [

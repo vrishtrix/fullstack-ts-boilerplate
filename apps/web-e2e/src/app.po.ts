@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   getParagraphText() {
-    return element(by.css('kubic-root h1')).getText();
+    return element(by.css('foretag-root h1')).getText();
   }
 }

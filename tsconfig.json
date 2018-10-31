@@ -18,52 +18,52 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@kubic/env/*": [
+      "@foretag/env/*": [
         "apps/*/src/environments/environment"
       ],
-      "@kubic/apps/*": [
+      "@foretag/apps/*": [
         "apps/*/src/index.ts"
       ],
-      "@kubic/schemas": [
+      "@foretag/schemas": [
         "libs/schemas/src/index.ts"
       ],
-      "@kubic/schemas/*": [
+      "@foretag/schemas/*": [
         "libs/schemas/src/lib/*"
       ],
-      "@kubic/shared": [
+      "@foretag/shared": [
         "libs/shared/src/index.ts"
       ],
-      "@kubic/core": [
+      "@foretag/core": [
         "libs/core/src/index.ts"
       ],
-      "@kubic/graphql": [
+      "@foretag/graphql": [
         "libs/graphql/src/index.ts"
       ],
-      "@kubic/i18n": [
+      "@foretag/i18n": [
         "libs/i18n/src/index.ts"
       ],
-      "@kubic/home": [
+      "@foretag/home": [
         "libs/home/src/index.ts"
       ],
-      "@kubic/dashboard": [
+      "@foretag/dashboard": [
         "libs/dashboard/src/index.ts"
       ],
-      "@kubic/not-found": [
+      "@foretag/not-found": [
         "libs/not-found/src/index.ts"
       ],
-      "@kubic/auth": [
+      "@foretag/auth": [
         "libs/auth/src/index.ts"
       ],
-      "@kubic/login": [
+      "@foretag/login": [
         "libs/login/src/index.ts"
       ],
-      "@kubic/logout": [
+      "@foretag/logout": [
         "libs/logout/src/index.ts"
       ],
-      "@kubic/server": [
+      "@foretag/server": [
         "libs/server/src/index.ts"
       ],
-      "@kubic/transfer-state": [
+      "@foretag/transfer-state": [
         "libs/transfer-state/src/index.ts"
       ]
     }

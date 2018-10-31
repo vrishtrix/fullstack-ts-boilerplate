@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@kubic/shared';
+import { SharedModule } from '@foretag/shared';
 import { RouterModule } from '@angular/router';
 
 import { LogoutComponent } from './logout.component';

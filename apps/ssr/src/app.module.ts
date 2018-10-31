@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AngularUniversalModule } from '@nestjs/ng-universal';
-import { transferStateMiddleware } from '@kubic/transfer-state';
+import { transferStateMiddleware } from '@foretag/transfer-state';
 
 import { webFolder, webServerFolder } from './utils';
 

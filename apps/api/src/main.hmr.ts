@@ -1,4 +1,4 @@
-import { environment, NestApp, createServer } from '@kubic/server';
+import { environment, NestApp, createServer } from '@foretag/server';
 
 import { AppModule } from './app/app.module';
 

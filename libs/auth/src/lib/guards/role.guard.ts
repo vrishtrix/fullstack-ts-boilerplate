@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Select } from '@ngxs/store';
-import { User } from '@kubic/schemas';
+import { User } from '@foretag/schemas';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@kubic/shared';
+import { SharedModule } from '@foretag/shared';
 import { NgxsModule } from '@ngxs/store';
 
 import { AuthService } from './auth.service';

@@ -1,4 +1,4 @@
-import { environment, createServer } from '@kubic/server';
+import { environment, createServer } from '@foretag/server';
 
 import { AppModule } from './app.module';
 

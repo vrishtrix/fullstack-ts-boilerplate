@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { AuthLogout } from '@kubic/auth';
+import { AuthLogout } from '@foretag/auth';
 import { map } from 'rxjs/operators';
 
 @Injectable()

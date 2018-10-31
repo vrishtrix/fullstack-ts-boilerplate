@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AuthPayload, LOGIN_MUTATION } from '@kubic/schemas';
+import { AuthPayload, LOGIN_MUTATION } from '@foretag/schemas';
 import { pluck } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 

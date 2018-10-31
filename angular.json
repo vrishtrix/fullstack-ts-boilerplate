@@ -7,7 +7,7 @@
       "root": "apps/web/",
       "sourceRoot": "apps/web/src",
       "projectType": "application",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "schematics": {},
       "architect": {
         "build": {
@@ -306,7 +306,7 @@
       "root": "libs/schemas",
       "sourceRoot": "libs/schemas/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -334,7 +334,7 @@
       "root": "libs/shared",
       "sourceRoot": "libs/shared/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -362,7 +362,7 @@
       "root": "libs/core",
       "sourceRoot": "libs/core/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -390,7 +390,7 @@
       "root": "libs/graphql",
       "sourceRoot": "libs/graphql/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -418,7 +418,7 @@
       "root": "libs/i18n",
       "sourceRoot": "libs/i18n/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -446,7 +446,7 @@
       "root": "libs/home",
       "sourceRoot": "libs/home/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -474,7 +474,7 @@
       "root": "libs/dashboard",
       "sourceRoot": "libs/dashboard/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -502,7 +502,7 @@
       "root": "libs/not-found",
       "sourceRoot": "libs/not-found/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -530,7 +530,7 @@
       "root": "libs/auth",
       "sourceRoot": "libs/auth/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "test": {
           "builder": "@nrwl/builders:jest",
@@ -558,7 +558,7 @@
       "root": "libs/login",
       "sourceRoot": "libs/login/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "test": {
           "builder": "@nrwl/builders:jest",
@@ -586,7 +586,7 @@
       "root": "libs/logout",
       "sourceRoot": "libs/logout/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
@@ -614,12 +614,12 @@
       "root": "libs/server",
       "sourceRoot": "libs/server/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "test": {
           "builder": "@nrwl/builders:jest",
           "options": {
-            "main": "libs/server/src/test.ts",
+            "main": "libs/server/src/test-setup.ts",
             "tsConfig": "libs/server/tsconfig.spec.json"
           }
         },
@@ -641,7 +641,7 @@
       "root": "libs/transfer-state",
       "sourceRoot": "libs/transfer-state/src",
       "projectType": "library",
-      "prefix": "kubic",
+      "prefix": "foretag",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

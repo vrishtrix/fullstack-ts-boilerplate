@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserTransferStateModule, BrowserModule } from '@angular/platform-browser';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { CoreModule } from '@kubic/core';
+import { CoreModule } from '@foretag/core';
 import { NgModule } from '@angular/core';
 import { NxModule } from '@nrwl/nx';
 
@@ -15,7 +15,7 @@ import { AppRouting } from './app.routing';
   declarations: [AppComponent],
   imports: [
     BrowserModule.withServerTransition({
-      appId: 'foretag-kubic',
+      appId: 'foretag-app',
     }),
     TransferHttpCacheModule,
     BrowserTransferStateModule,

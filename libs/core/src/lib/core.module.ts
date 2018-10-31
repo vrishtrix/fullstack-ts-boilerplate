@@ -9,10 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NgxsModule } from '@ngxs/store';
 
-import { GraphqlModule } from '@kubic/graphql';
-import { I18nModule } from '@kubic/i18n';
-import { AuthModule } from '@kubic/auth';
-import { environment } from '@kubic/env/web';
+import { GraphqlModule } from '@foretag/graphql';
+import { I18nModule } from '@foretag/i18n';
+import { AuthModule } from '@foretag/auth';
+import { environment } from '@foretag/env/web';
 
 import { CoreService } from './services/core.service';
 import { CustomStorage } from './services/custom-storage.service';

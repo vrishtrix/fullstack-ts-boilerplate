@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "kubic",
+      "foretag",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "kubic",
+      "foretag",
       "kebab-case"
     ]
   }

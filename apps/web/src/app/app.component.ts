@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { environment } from '@kubic/env/web';
+import { environment } from '@foretag/env/web';
 import { Store } from '@ngxs/store';
 
 @Component({
-  selector: 'kubic-root',
+  selector: 'foretag-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

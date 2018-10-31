@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@kubic/shared';
-// import { AuthModule } from '@kubic/auth';
+import { SharedModule } from '@foretag/shared';
+// import { AuthModule } from '@foretag/auth';
 
 // import { HomeRouting } from './home.routing';
 import { HeaderComponent } from './components';

@@ -1,4 +1,4 @@
-import { User } from '@kubic/schemas';
+import { User } from '@foretag/schemas';
 import { AuthLoginPayload } from './interfaces';
 
 export class AuthLogin {
