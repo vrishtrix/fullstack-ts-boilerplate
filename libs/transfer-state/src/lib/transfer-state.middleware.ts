@@ -14,7 +14,7 @@ export function transferStateMiddleware(
     auth: {
       user: req['session']['user'],
       tokens: {
-        jwt: req['session']['authToken'],
+        jwt: req['session']['jwtToken'],
         csrf: req['csrfToken'](),
       },
     },
