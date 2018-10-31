@@ -1,4 +1,4 @@
-import { User } from '../../../schemas/src/lib/prisma/index';
+import { User } from '@foretag/schemas/prisma';
 
 export interface TransferStateModel {
   hostname: string;
