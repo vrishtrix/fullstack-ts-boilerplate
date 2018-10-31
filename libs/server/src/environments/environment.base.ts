@@ -1,8 +1,9 @@
+import * as deepMerge from 'deepmerge';
 require('dotenv').config();
 
 const secret = process.env.APP_SECRET;
 
-export const createEnv = (env: any = {}) => ({
+export const createEnv = (env: any = {}) => deepMerge({
   production: false,
   hmr: false,
   secret,
@@ -29,14 +30,12 @@ export const createEnv = (env: any = {}) => ({
   },
   redis: {
     host: process.env.REDIS_HOST,
-    pass: process.env.REDIS_PASS,
     port: +process.env.REDIS_PORT,
-    db: +process.env.REDIS_DB,
+    db: +process.env.REDIS_DB || 0,
   },
   prisma: {
     endpoint: `${process.env.PRISMA_PROTO}://${process.env.PRISMA_HOST}:${process.env.PRISMA_PORT}`,
     secret: process.env.PRISMA_SECRET,
     debug: true,
   },
-  ...env,
-});
+}, env);
