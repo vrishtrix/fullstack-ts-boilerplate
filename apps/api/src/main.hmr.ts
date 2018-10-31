@@ -1,6 +1,5 @@
-import { NestApp, createServer } from '@kubic/server';
+import { environment, NestApp, createServer } from '@kubic/server';
 
-import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 
 createServer({

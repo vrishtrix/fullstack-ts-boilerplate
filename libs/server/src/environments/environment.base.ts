@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const secret = process.env.APP_SECRET;
 
 export const createEnv = (env: any = {}) => ({
@@ -8,6 +10,7 @@ export const createEnv = (env: any = {}) => ({
     api: {
       name: process.env.API_NAME,
       port: +process.env.API_PORT,
+      graphql: 'graphql',
     },
     ssr: {
       name: process.env.SSR_NAME,
@@ -15,7 +18,7 @@ export const createEnv = (env: any = {}) => ({
     },
     web: {
       name: process.env.APP_NAME,
-      title: process.env.APP_DEFAULT_TITLE,
+      title: process.env.APP_TITLE,
     },
   },
   session: {
@@ -26,11 +29,12 @@ export const createEnv = (env: any = {}) => ({
   },
   redis: {
     host: process.env.REDIS_HOST,
+    pass: process.env.REDIS_PASS,
     port: +process.env.REDIS_PORT,
     db: +process.env.REDIS_DB,
   },
   prisma: {
-    endpoint: `${process.env.PRISMA_HOST}:${process.env.PRISMA_PORT}`,
+    endpoint: `${process.env.PRISMA_PROTO}://${process.env.PRISMA_HOST}:${process.env.PRISMA_PORT}`,
     secret: process.env.PRISMA_SECRET,
     debug: true,
   },

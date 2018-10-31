@@ -1,10 +1,5 @@
 import { User } from '@kubic/schemas';
-
-export interface AuthLoginPayload {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-}
+import { AuthLoginPayload } from './interfaces';
 
 export class AuthLogin {
   static readonly type = '[Auth] Login';

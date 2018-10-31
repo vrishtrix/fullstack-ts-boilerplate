@@ -8,7 +8,7 @@
     "nx.json": "*"
   },
   "projects": {
-    "universal": {
+    "ssr": {
       "tags": []
     },
     "web": {
@@ -54,6 +54,9 @@
       "tags": []
     },
     "server": {
+      "tags": []
+    },
+    "transfer-state": {
       "tags": []
     }
   }

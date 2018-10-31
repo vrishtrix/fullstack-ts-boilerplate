@@ -27,7 +27,7 @@ export const LOGIN_MUTATION = gql`
       user {
         ...UserResponse 
       }
-      token
+      jwt
     }
   }
   ${authFragments.user}
@@ -39,7 +39,7 @@ export const SIGNUP_MUTATION = gql`
       user {
         ...UserResponse
       }
-      token
+      jwt
     }
   }
   ${authFragments.user}

@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { environment } from '@kubic/env/web';
 import { Store } from '@ngxs/store';
-// import { AuthCheck } from '@kubic/auth';
 
 @Component({
   selector: 'kubic-root',

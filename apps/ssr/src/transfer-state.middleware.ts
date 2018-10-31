@@ -1,5 +1,5 @@
-import { environment } from '@kubic/env/api';
 import { Request, Response, NextFunction } from 'express';
+import { environment } from '@kubic/server';
 
 export function transferStateMiddleware(
   req: Request,

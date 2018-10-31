@@ -1,4 +1,4 @@
-import { User } from '@kubic/schemas/prisma';
+import { User } from '../../../schemas/src/lib/prisma/index';
 
 export interface TransferStateModel {
   hostname: string;

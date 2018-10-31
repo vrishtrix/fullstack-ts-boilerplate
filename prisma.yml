@@ -1,4 +1,4 @@
-endpoint: ${env:PRISMA_HOST}:${env:PRISMA_PORT}
+endpoint: ${env:PRISMA_PROTO}://${env:PRISMA_HOST}:${env:PRISMA_PORT}
 secret: ${env:PRISMA_SECRET}
 datamodel:
   - ${env:SHARED_SCHEMA_PATH}/enums.graphql

@@ -1,6 +1,5 @@
-import { createServer } from '@kubic/server';
+import { environment, createServer } from '@kubic/server';
 
-import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 
 createServer({

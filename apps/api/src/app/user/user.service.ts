@@ -1,8 +1,8 @@
-import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '../../../../../libs/schemas/src/lib/prisma/index';
+import { UserCreateInput, UserUpdateInput, UserWhereInput, UserWhereUniqueInput } from '@kubic/schemas/prisma';
 import { Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcryptjs';
+import * as argon2 from 'argon2';
 
-import { PrismaService } from '../prisma/index';
+import { PrismaService } from '../prisma';
 
 @Injectable()
 export class UserService {
@@ -21,7 +21,10 @@ export class UserService {
   }
 
   public async create(user: UserCreateInput) {
-    const password = await bcrypt.hash(user.password, 10);
+    const password = await argon2.hash(user.password, {
+      type: argon2.argon2id,
+    });
+
     return await this.prisma.mutation.createUser({
       data: {
         ...user,

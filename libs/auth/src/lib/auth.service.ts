@@ -4,7 +4,7 @@ import { AuthPayload, LOGIN_MUTATION } from '@kubic/schemas';
 import { pluck } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
-import { AuthLoginPayload } from './auth.actions';
+import { AuthLoginPayload } from './interfaces';
 
 @Injectable()
 export class AuthService {

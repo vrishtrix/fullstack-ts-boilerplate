@@ -9,7 +9,7 @@ services:
       - ${REDIS_PORT}:${REDIS_PORT}
     environment:
       name: ${REDIS_NAME}
-      password: ${REDIS_PASS}
+      requirepass: ${REDIS_PASS}
   prisma:
     image: prismagraphql/prisma:1.16
     restart: always

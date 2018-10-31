@@ -29,12 +29,14 @@ export class GraphqlModule implements OnInit {
     });
 
     const auth = setContext((_, { headers }) => {
-      const token = this.store.selectSnapshot(AuthState.token);
+      const jwtToken = this.store.selectSnapshot(AuthState.jwtToken);
+      const csrfToken = this.store.selectSnapshot(AuthState.csrfToken);
 
       return {
         ...headers,
         'Origin': 'http://localhost:4200',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${jwtToken}`,
+        'X-XSRF-Token': csrfToken,
       };
     });
 

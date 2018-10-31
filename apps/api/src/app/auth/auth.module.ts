@@ -1,10 +1,9 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { environment } from '@kubic/env/api';
+import { environment } from '@kubic/server';
 
-import { JwtStrategy } from './jwt.strategy';
-import { UserModule } from '../user/user.module';
+import { UserModule } from '../user';
 
 @Module({
   imports: [

@@ -1,43 +1,59 @@
-import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
+import { TRANSFER_STATE_TOKEN, TransferStateModel } from '@kubic/transfer-state';
 import { AuthPayload } from '@kubic/schemas';
+import { Inject } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AuthLogin, AuthLogout } from './auth.actions';
 import { AuthService } from './auth.service';
+import { AuthStateModel } from './interfaces';
 
-@State<AuthPayload>({
+@State<AuthStateModel>({
   name: 'auth',
 })
-export class AuthState {
-  constructor(private readonly authService: AuthService) {}
+export class AuthState implements NgxsOnInit {
+  constructor(
+    @Inject(TRANSFER_STATE_TOKEN)
+    private readonly transferState: TransferStateModel,
+    private readonly authService: AuthService,
+  ) {}
+
+  ngxsOnInit({ setState }: StateContext<AuthStateModel>) {
+    setState(this.transferState.auth);
+  }
 ​
   @Selector()
-  static token({ token }: AuthPayload) {
-    return token;
+  static jwtToken({ tokens }: AuthStateModel) {
+    return tokens && tokens.jwt;
   }
 
   @Selector()
-  static user({ user }: AuthPayload) {
+  static csrfToken({ tokens }: AuthStateModel) {
+    return tokens && tokens.csrf;
+  }
+
+  @Selector()
+  static user({ user }: AuthStateModel) {
     return user;
   }
 
   @Action(AuthLogin)
   login(
-    { patchState }: StateContext<AuthPayload>,
+    { getState, patchState }: StateContext<AuthStateModel>,
     { payload }: AuthLogin,
   ): Observable<AuthPayload> {
     return this.authService.login(payload)
-      .pipe(tap(({ token, user }) => {
+      .pipe(tap(({ jwt, user }) => {
         patchState({
-          token,
+          tokens: { jwt },
           user,
         });
       }));
   }
 
   @Action(AuthLogout)
-  logout({ setState }: StateContext<AuthPayload>): Observable<boolean> {
+  logout({ setState }: StateContext<AuthStateModel>): Observable<boolean> {
     return this.authService.logout()
       .pipe(tap(() => setState({})));
   }

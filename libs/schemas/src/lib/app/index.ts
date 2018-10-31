@@ -4,7 +4,7 @@ export enum Role {
 }
 
 export interface AuthPayload {
-    token?: string;
+    jwt?: string;
     user?: User;
 }
 

@@ -1,4 +1,4 @@
 type AuthPayload {
-  token: String
+  jwt: String
   user: User
 }

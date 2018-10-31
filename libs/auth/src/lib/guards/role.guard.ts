@@ -14,8 +14,8 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.user$.pipe(
-      filter(user => !!user),
-      map(({ roles }: any) =>
+      filter(user => user),
+      map(({ roles }) =>
         route.data['roles'].every(role =>
           roles.includes(role),
         ),

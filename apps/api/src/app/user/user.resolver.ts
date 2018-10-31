@@ -1,47 +1,25 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UserInputError } from 'apollo-server';
 import { Req, UseGuards } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { User } from '@kubic/schemas';
+import { User } from '@kubic/schemas/prisma';
 import { Request } from 'express';
-import * as bcrypt from 'bcryptjs';
+import * as argon2 from 'argon2';
 
-import { GqlAuthGuard } from '../auth/index';
+import { GqlAuthGuard } from '../auth';
 import { UserService } from './user.service';
+import { AppService } from '../app.service';
 
 @Resolver('User')
 export class UserResolver {
   constructor(
     private readonly user: UserService,
-    private readonly jwt: JwtService,
+    private readonly app: AppService,
   ) {}
-
-  private hasValidationErrors(validationErrors: object) {
-    return Object.keys(validationErrors).length > 0;
-  }
-
-  private throwValidationErrors(action: string, validationErrors: object) {
-    throw new UserInputError(
-      `Failed to ${action} due to validation errors`,
-      { validationErrors },
-    );
-  }
-
-  private createToken(req: Request, user: User) {
-    const token = this.jwt.sign({
-      hash: user.password,
-      id: user.id,
-    });
-
-    req['session'].authToken = token;
-    return token;
-  }
 
   @Query()
   // @UseGuards(GqlAuthGuard)
   findUser(@Args('username') username: string): Promise<User | null> {
     if (!username) {
-      this.throwValidationErrors('findUser', {
+      this.app.throwValidationErrors('findUser', {
         username: 'Username is required',
       });
     }
@@ -64,22 +42,22 @@ export class UserResolver {
   ) {
     const user = await this.user.find({ email });
     if (!user) {
-      this.throwValidationErrors('login', {
+      this.app.throwValidationErrors('login', {
         email: `No such user found with email`,
       });
     }
 
-    const valid = await bcrypt.compare(password, user.password);
+    const valid = await argon2.verify(password, user.password);
     if (!valid) {
-      this.throwValidationErrors('login', {
+      this.app.throwValidationErrors('login', {
         password: `Password doesn't match`,
       });
     }
 
-    const token = this.createToken(req, user);
+    const jwt = this.app.createJwtToken(req, user);
 
     return {
-      token,
+      jwt,
       user,
     };
   }
@@ -105,8 +83,8 @@ export class UserResolver {
       errors.username = `Username ${username} is already in use`;
     }
 
-    if (this.hasValidationErrors(errors)) {
-      this.throwValidationErrors('signup', errors);
+    if (this.app.hasValidationErrors(errors)) {
+      this.app.throwValidationErrors('signup', errors);
     }
 
     const user = await this.user.create({
@@ -115,10 +93,10 @@ export class UserResolver {
       password,
     });
 
-    const token = this.createToken(req, user);
+    const jwt = this.app.createJwtToken(req, user);
 
     return {
-      token,
+      jwt,
       user,
     };
   }

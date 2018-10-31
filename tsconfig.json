@@ -3,6 +3,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
+    "module": "commonjs",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -61,6 +62,9 @@
       ],
       "@kubic/server": [
         "libs/server/src/index.ts"
+      ],
+      "@kubic/transfer-state": [
+        "libs/transfer-state/src/index.ts"
       ]
     }
   },
