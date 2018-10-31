@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { Attach, Core_v1Api, Exec, KubeConfig, Watch } from '@kubernetes/client-node';
-import { K8sConfig } from './k8s-config.service';
+import { K8sConfig } from '../../../../.exclude/k8s-config.service';
 import { PortForward } from '@kubernetes/client-node/dist/portforward';
 
 @Module({
