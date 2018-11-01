@@ -1,6 +1,7 @@
 import { Action, NgxsOnInit, Selector, State, StateContext } from '@ngxs/store';
 import { TRANSFER_STATE_TOKEN, TransferStateModel } from '@foretag/transfer-state';
 import { AuthPayload } from '@foretag/schemas';
+import { environment } from '@foretag/env/web';
 import { Inject } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -18,10 +19,6 @@ export class AuthState implements NgxsOnInit {
     private readonly transferState: TransferStateModel,
     private readonly authService: AuthService,
   ) {}
-
-  ngxsOnInit({ setState }: StateContext<AuthStateModel>) {
-    setState(this.transferState.auth);
-  }
 ​
   @Selector()
   static jwtToken({ tokens }: AuthStateModel) {
@@ -36,6 +33,12 @@ export class AuthState implements NgxsOnInit {
   @Selector()
   static user({ user }: AuthStateModel) {
     return user;
+  }
+
+  ngxsOnInit({ patchState }: StateContext<AuthStateModel>) {
+    if (environment.production) {
+      patchState(this.transferState.auth);
+    }
   }
 
   @Action(AuthLogin)
@@ -54,8 +57,7 @@ export class AuthState implements NgxsOnInit {
 
   @Action(AuthLogout)
   logout({ setState }: StateContext<AuthStateModel>): Observable<boolean> {
-    return this.authService.logout()
-      .pipe(tap(() => setState({})));
+    return this.authService.logout().pipe(tap(() => setState({})));
   }
 
 }

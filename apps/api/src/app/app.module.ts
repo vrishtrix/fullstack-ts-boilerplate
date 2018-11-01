@@ -6,13 +6,13 @@ import { GraphqlOptions } from './graphql.options';
 import { TerminusService } from './terminus.service';
 
 import { AppController } from './app.controller';
+import { CommonModule } from './common.module';
 import { PrismaModule } from './prisma';
-import { AuthModule } from './auth';
 import { UserModule } from './user';
-import { AppService } from './app.service';
+import { AuthModule } from './auth';
 
 @Module({
-  providers: [AppService],
+  controllers: [AppController],
   imports: [
     GraphQLModule.forRootAsync({
       useClass: GraphqlOptions,
@@ -20,10 +20,10 @@ import { AppService } from './app.service';
     TerminusModule.forRootAsync({
       useClass: TerminusService,
     }),
-    AuthModule,
+    CommonModule,
     PrismaModule,
+    AuthModule,
     UserModule,
   ],
-  controllers: [AppController],
 })
 export class AppModule {}

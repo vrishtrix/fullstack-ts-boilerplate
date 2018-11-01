@@ -1,5 +1,5 @@
 projects:
-  database:
+  api:
     schemaPath: ${env:PRISMA_SCHEMA_PATH}/schema.graphql
     includes:
       - ${env:PRISMA_SCHEMA_PATH}/seed.graphql

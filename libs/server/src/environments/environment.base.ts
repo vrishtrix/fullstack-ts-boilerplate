@@ -6,6 +6,7 @@ const secret = process.env.APP_SECRET;
 export const createEnv = (env: any = {}) => deepMerge({
   production: false,
   hmr: false,
+  csrf: false,
   secret,
   apps: {
     api: {

@@ -45,9 +45,6 @@
       "@foretag/home": [
         "libs/home/src/index.ts"
       ],
-      "@foretag/dashboard": [
-        "libs/dashboard/src/index.ts"
-      ],
       "@foretag/not-found": [
         "libs/not-found/src/index.ts"
       ],

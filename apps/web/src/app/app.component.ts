@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
     private readonly title: Title,
   ) {}
 
-  // Add title to web page depending on route data
-  // <https://toddmotto.com/dynamic-page-titles-angular-2-router-events>
+  // From <https://toddmotto.com/dynamic-page-titles-angular-2-router-events>
+  // @TODO: Add loader when navigating
   ngOnInit() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),

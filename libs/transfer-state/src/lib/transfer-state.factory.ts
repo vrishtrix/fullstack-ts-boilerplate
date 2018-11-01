@@ -24,7 +24,7 @@ export function bootstrapFactory(
   ).subscribe(() => {
     transferState.set<TransferStateModel>(
       TRANSFER_STATE_KEY,
-      req.app.get('transferState'),
+      req.app.get(TRANSFER_STATE_KEY),
     );
   });
 }

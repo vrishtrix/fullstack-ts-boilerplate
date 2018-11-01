@@ -1,4 +1,5 @@
 module.exports = {
+  node: true,
   module: {
     rules: [
       {
@@ -6,7 +7,7 @@ module.exports = {
         test: /\.ts$/,
         use: 'tslint-loader',
         exclude: [
-          'node_modules',
+          /node_modules/,
           /\.(ngfactory|ngstyle)\.ts$/,
         ],
       },

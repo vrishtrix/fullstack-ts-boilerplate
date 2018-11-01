@@ -7,5 +7,5 @@ seed:
   import: ${env:PRISMA_SCHEMA_PATH}/seed.graphql
 hooks:
   post-deploy:
-    - sudo graphql get-schema --project database
-    - sudo graphql codegen --project database
+    - sudo graphql get-schema --project api
+    - sudo graphql codegen --project api

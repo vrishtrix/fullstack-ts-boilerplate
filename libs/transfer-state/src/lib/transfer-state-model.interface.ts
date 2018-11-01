@@ -1,18 +1,12 @@
-import { User } from '@foretag/schemas/prisma';
+import { AuthStateModel } from '@foretag/auth';
 
 export interface TransferStateModel {
+  auth: AuthStateModel;
   hostname: string;
   originalUrl: string;
   referer: string;
   app: {
     title: string;
     name: string;
-  };
-  auth: {
-    user?: User,
-    tokens: {
-      csrf: string;
-      jwt?: string;
-    };
   };
 }

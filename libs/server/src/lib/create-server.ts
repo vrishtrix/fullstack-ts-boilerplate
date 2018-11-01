@@ -39,13 +39,16 @@ export async function createServer({
   }));
   app.enableCors();
 
-  if (environment.production) {
+  if (environment.csrf) {
     app.use(csurf());
   }
 
   async function start() {
     await app.listenAsync(port, hostname);
-    console.log(`${name} server started on ${hostname || 'http://localhost'}:${port}`);
+    const proto = 'http';
+    const host = 'localhost';
+
+    console.log(`${name} server is listening on ${host}:${port}, endpoint is available at ${proto}://${host}:${port}`);
     return app;
   }
 

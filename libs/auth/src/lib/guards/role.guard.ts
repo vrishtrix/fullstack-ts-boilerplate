@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
 import { Select } from '@ngxs/store';
 import { User } from '@foretag/schemas';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AuthState } from '../auth.state';
 
@@ -14,7 +14,6 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.user$.pipe(
-      filter(user => user),
       map(({ roles }) =>
         route.data['roles'].every(role =>
           roles.includes(role),
